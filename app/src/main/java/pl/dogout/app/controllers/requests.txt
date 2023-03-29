@@ -1,0 +1,14 @@
+Methods	    Urls	                Actions
+POST	    /api/auth/signup	    signup new account
+POST	    /api/auth/signin	    login an account
+POST	    /api/auth/signout	    logout the account
+
+GET         /api/place/all          get all places
+GET         /api/place/:id          get a specific place
+
+POST        /api/walk/go            add a new walk for the user
+GET         /api/walk/active        get user's active walk
+
+POST        /api/dog/add-dog        add a new dog for the user
+GET         /api/dog/dog-info       get info about user's dog
+DELETE      /api/dog/delete-dog     delete user's dog

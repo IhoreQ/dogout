@@ -1,0 +1,355 @@
+/* Tablet screen */
+@media only screen and (max-width: 960px) {
+
+    .app-container {
+        max-width: 600px;
+    }
+
+    .login-container {
+        width: 100%;
+        height: 600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50px;
+        box-shadow: 0 60px 40px -30px rgb(0, 0, 0, 0.4);
+    }
+
+    .register-container {
+        height: 700px;
+    }
+
+    .app-cover-title h1 {
+        font-size: 2rem;
+    }
+
+    .menu-container {
+        width: 100%;
+        height: 90px;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 50px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+        transition: 0.5s all;
+        z-index: 3;
+        margin: 0;
+    }
+
+    .menu-bar {
+        display: none;
+    }
+
+    .menu-bar-active {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        top: 90px;
+    }
+
+    .menu-container-active {
+        height: 450px;
+    }
+
+    .menu-logo {
+        position: absolute;
+        height: 90px;
+        flex-direction: row;
+        margin: 0 0 0 5%;
+        width: calc(100% - 4rem);
+    }
+
+    .menu-logo-inner {
+        margin: 0;
+    }
+
+    .menu-dog-logo {
+        width: 200px;
+    }
+
+    .menu-burger {
+        display: block;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .menu-bar-list {
+        margin: 0;
+        text-align: center;
+    }
+
+    .menu-bar-element a, .log-out-button a {
+        margin-left: 0;
+    }
+
+    .separate-bar {
+        display: none;
+    }
+
+    .app-content-container {
+        width: 100%;
+        height: calc(100% - 90px);
+        top: 90px;
+        left: 0;
+    }
+    
+    .home-container {
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .home-content {
+        height: 88%;
+    }
+
+    .friends-container {
+        height: 12%;
+        width: 100%;
+        border-radius: 50px 50px 0 0;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .friends-header {
+        height: 100%;
+        margin-top: 0;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .friends-title i {
+        display: block;
+    }
+
+    .friends-separate-bar {
+        display: none;
+    }
+
+    .friends-bar {
+        display: none;
+    }
+
+    .new-friends {
+        display: none;
+    }
+
+    .container-is-active {
+        display: flex;
+    }
+
+    .active-walk-box {
+        width: 80%;
+    }
+
+    .places-footer-ideas {
+        width: 75%;
+    }
+
+    .new-dog-paw {
+        font-size: 40rem;
+    }
+    
+    .doggy-name-container {
+        margin-bottom: 1rem;
+    }
+
+    .doggy-info-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70%;
+    }
+
+    .left-dog-info, .right-dog-info {
+        flex-direction: row;
+        width: 100%;
+        height: 25%;
+    }
+
+    .dog-photo-box {
+        order: -1;
+        margin-bottom: 1rem;
+    }
+
+    .left-dog-info, .right-dog-info {
+        margin-bottom: 1rem;
+    }
+    
+    .dog-size-box, .dog-age-box, .dog-breed-box, .dog-gender-box {
+        width: 40%;
+        height: 100%;
+    }
+
+    .doggy-description-container {
+        height: 20%;
+    }
+
+    .login-message, .register-message {
+        font-size: 1.3rem;  
+        top: -7%;
+    }
+
+    .place-dogs-container {
+        width: 100%;
+    }
+
+    .dog-list-header, .new-places-idea-list-header {
+        font-size: 1.5rem;
+    }
+
+    .dog-list, .new-places-idea-list {
+        font-size: 1.2rem;
+    }
+
+    .walk-time {
+        font-size: 1.5rem;
+    }
+
+    .dog-count-header, .new-places-ideas-header {
+        font-size: 2rem;
+    }
+
+    .walk-select {
+        font-size: 1.5rem;
+    }
+
+    .place-name, .admin-header-title {
+        font-size: 2rem;
+        width: 300px;
+    }
+
+    .place-return-box, .admin-return-box {
+        width: 75px;
+        font-size: 1.5rem;
+        background: #92420F;
+    }
+
+    .active-walk-box-header {
+        height: 40%;
+    }
+}
+
+/* Phone screen */
+@media only screen and (max-width: 520px) {
+
+    .main-container {
+        padding: 0;
+    }
+
+    .app-container {
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    .dog-logo {
+        width: 90vw;
+    }
+
+    .app-cover {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .app-cover-title h1 {
+        font-size: 1.5rem;
+    }
+
+    .app-cover-close {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .app-cover-inner-container p {
+        font-size: 1.5rem;
+    }
+
+    .main-app-container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .menu-container  {
+        border-radius: 0;
+    }
+    
+    .active-walk-box {
+        width: 100%;
+    }
+
+    .active-walk-box-header {
+        padding-right: 0.2rem;
+        justify-content: space-between;
+    }
+
+    .active-walk-box-header p {
+        padding: 0;
+
+    }
+
+    .places-footer-ideas {
+        width: 100%;
+    }
+
+    .password-change-form input, .password-change-form .blue-button, .city-change-form select, .city-change-form .blue-button {
+        width: 100%;
+    }
+
+    .new-dog-form input, .new-dog-form select, .new-dog-form .blue-button, .new-dog-form textarea, .new-dog-form label {
+        width: 90%;
+    }
+
+    .doggy-name-container {
+        width: 100%;
+    }
+
+    .dog-photo-box {
+        width: 100%;
+    }
+
+    .description-box {
+        width: 90%;
+    }
+
+    .login-message, .register-message {
+        font-size: 1rem;
+    }
+
+    .dog-list-header, .new-places-idea-list-header {
+        font-size: 1.3rem;
+    }
+
+    .dog-list, .new-places-idea-list {
+        font-size: 1rem;
+    }
+
+    .walk-time {
+        font-size: 1.3rem;
+    }
+
+    .walk-select {
+        font-size: 1.3rem;
+    }
+
+    .place-header, .admin-header {
+        background: #92420F;
+    }
+
+    .place-return-box, .admin-return-box {
+        border-radius: 0;
+    }
+
+    .place-return-box:hover, .admin-return-box:hover {
+        background: #ad4f14;
+    }
+
+    .doggy-footer-remove-box {
+        width: 100%;
+        border-radius: 50px 50px 0 0;
+    }
+
+    .doggy-description-container {
+        margin-bottom: 1rem;
+    }
+}

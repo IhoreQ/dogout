@@ -13,8 +13,14 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-web:3.0.4")
+	implementation("org.postgresql:postgresql:42.5.4")
+	implementation("org.springframework.boot:spring-boot-devtools:3.0.4")
+	implementation("org.projectlombok:lombok:1.18.26")
+	implementation("org.springframework.boot:spring-boot-starter-security:3.0.4")
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.4")
+	testImplementation("org.springframework.boot:spring-boot-starter-test:3.0.4")
 }
 
 tasks.withType<Test> {
