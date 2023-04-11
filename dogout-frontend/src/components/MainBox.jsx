@@ -5,7 +5,6 @@ const MainBox = () => {
     return (
         <div className="main-container">
             <div class="app-container">
-                
             </div>
         </div>
     )
