@@ -3,25 +3,26 @@ package pl.dogout.app.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue
-    @Getter
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Getter
-    @Setter
     private String email;
 
-    @Getter
-    @Setter
     private String hasDog;
 
+    public User() {}
+
+    public User(Long id, String email, String hasDog) {
+        this.id = id;
+        this.email = email;
+        this.hasDog = hasDog;
+    }
 }

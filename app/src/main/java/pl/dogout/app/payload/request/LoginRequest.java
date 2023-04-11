@@ -1,18 +1,21 @@
 package pl.dogout.app.payload.request;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-@AllArgsConstructor
 public class LoginRequest {
 
-    @Setter
-    @Getter
-    private String email;
+    private final String email;
 
-    @Setter
-    @Getter
-    private String password;
+    private final String password;
+
+    public LoginRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
