@@ -1,0 +1,23 @@
+.main-container {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #C3B3A6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    transition: 0.5s all;
+}
+
+.app-container {
+    position: relative;
+    background-color: #C34E08;
+    width: 100%; 
+    max-width: 1550px;
+    height: 850px;
+    box-shadow: 0 60px 40px -30px rgb(0, 0, 0, 0.4);
+    border-radius: 50px;
+    overflow: hidden;
+    transition: 0.5s all;
+}

@@ -33,6 +33,5 @@ public class AuthController {
     public ResponseEntity<?> logout() {
         return ResponseEntity.ok(new MessageResponse("User logged out!"));
     }
-
-
+    
 }
