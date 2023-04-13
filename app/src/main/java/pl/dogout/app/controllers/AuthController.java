@@ -19,7 +19,6 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
-
     @PostMapping("/login")
     public ResponseEntity<String> authenticateUser() {
         return ResponseEntity.ok("Okej");
@@ -31,8 +30,8 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<MessageResponse> logout() {
-        return ResponseEntity.ok(new MessageResponse("User logged out!"));
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("User logged out!");
     }
 
 }
