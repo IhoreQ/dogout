@@ -9,11 +9,6 @@ import lombok.Setter;
 import java.sql.Time;
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-
 @Entity
 @Table(name = "active_walks", schema = "public", catalog = "dogout")
 public class ActiveWalk {

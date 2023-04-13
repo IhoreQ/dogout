@@ -1,6 +1,10 @@
 package pl.dogout.app.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
@@ -10,7 +14,7 @@ public class Dog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_dog")
-    private int idDog;
+    private Long idDog;
     @Basic
     @Column(name = "name")
     private String name;
@@ -35,6 +39,22 @@ public class Dog {
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
     private User usersByIdUser;
 
+    public Dog() {}
+
+    public Dog(Long idDog, String name, int age, boolean gender, String description, String photo, DogBreed dogsBreedByIdBreed, User usersByIdUser) {
+        this.idDog = idDog;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.description = description;
+        this.photo = photo;
+        this.dogsBreedByIdBreed = dogsBreedByIdBreed;
+        this.usersByIdUser = usersByIdUser;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public boolean equals(Object o) {

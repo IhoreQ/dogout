@@ -1,8 +1,17 @@
 package pl.dogout.app.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 
 @Entity
 @Table(name = "users_details", schema = "public", catalog = "dogout")

@@ -6,11 +6,6 @@ import lombok.*;
 import java.util.Collection;
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-
 @Entity
 @Table(name = "addresses", schema = "public", catalog = "dogout")
 public class Address {

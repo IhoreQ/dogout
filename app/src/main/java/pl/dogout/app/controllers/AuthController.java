@@ -10,9 +10,6 @@ import pl.dogout.app.repository.UserRepository;
 @CrossOrigin
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
-
     @PostMapping("/login")
     public ResponseEntity<String> authenticateUser() {
         return ResponseEntity.ok("Okej");

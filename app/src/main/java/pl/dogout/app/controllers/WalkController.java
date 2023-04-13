@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class WalkController {
 
-    @PostMapping("/go")
+    @PostMapping
     public ResponseEntity<String> goForAWalk() {
         return ResponseEntity.ok("Gone");
     }
 
-    @GetMapping("/active")
+    @GetMapping
     public ResponseEntity<String> getActiveWalk() {
         return ResponseEntity.ok("Active walk");
     }
