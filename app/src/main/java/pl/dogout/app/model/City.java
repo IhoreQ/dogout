@@ -1,10 +1,6 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -20,11 +16,11 @@ public class City {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "citiesByCity")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "citiesByCity")
     private Collection<Address> addressesByIdCity;
-    @OneToMany(mappedBy = "citiesByIdCity")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "citiesByIdCity")
     private Collection<Place> placesByIdCity;
-    @OneToMany(mappedBy = "citiesByIdCity")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "citiesByIdCity")
     private Collection<UsersDetails> usersDetailsByIdCity;
 
     public int getIdCity() {

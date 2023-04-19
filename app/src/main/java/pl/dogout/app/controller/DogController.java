@@ -1,9 +1,13 @@
-package pl.dogout.app.controllers;
+package pl.dogout.app.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dogout.app.models.Dog;
-import pl.dogout.app.services.DogService;
+import pl.dogout.app.dto.requests.DogAddRequest;
+import pl.dogout.app.model.Dog;
+import pl.dogout.app.service.DogService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/dog")
@@ -17,24 +21,27 @@ public class DogController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addDog() {
-        return ResponseEntity.ok("New Dog");
+    public ResponseEntity<HttpStatus> addDog(@RequestBody DogAddRequest dogAddRequest) {
+        // TODO
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<String> getDogInfo() {
-        Dog dog = dogService.getDogInfo(26L);
 
+        Dog dog = dogService.getDogInfo(26L);
         return ResponseEntity.ok(dog.getName());
     }
 
     @GetMapping("/{placeId}")
-    public ResponseEntity<String> getAllDogs(@PathVariable String placeId) {
-        return ResponseEntity.ok("All dogs");
+    public List<Dog> getAllDogsFromPlace(@PathVariable Long placeId) {
+        return dogService.getDogsFromPlace(placeId);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteDog() {
+
+
         return ResponseEntity.ok("Your Dog has been deleted");
     }
 

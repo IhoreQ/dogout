@@ -1,18 +1,9 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Objects;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 
 @Entity
 @Table(name = "places", schema = "public", catalog = "dogout")
@@ -29,14 +20,36 @@ public class Place {
     @Column(name = "photo")
     private String photo;
 
-    @OneToMany(mappedBy = "placesByIdPlace")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "placesByIdPlace")
     private Collection<ActiveWalk> activeWalksByIdPlace;
+
     @ManyToOne
     @JoinColumn(name = "id_address", referencedColumnName = "id_address", nullable = false)
     private Address addressesByIdAddress;
+
     @ManyToOne
     @JoinColumn(name = "id_city", referencedColumnName = "id_city", nullable = false)
     private City citiesByIdCity;
+
+    public Place() {}
+
+    public Place(int idPlace, String name, String photo) {
+        this.idPlace = idPlace;
+        this.name = name;
+        this.photo = photo;
+    }
+
+    public int getIdPlace() {
+        return idPlace;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
 
     @Override
     public boolean equals(Object o) {

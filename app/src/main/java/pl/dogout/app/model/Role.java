@@ -1,18 +1,9 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Objects;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 
 @Entity
 @Table(name = "roles", schema = "public", catalog = "dogout")
@@ -24,7 +15,7 @@ public class Role {
     @Basic
     @Column(name = "role")
     private String role;
-    @OneToMany(mappedBy = "rolesByIdRole")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "rolesByIdRole")
     private Collection<User> usersByIdRole;
 
     public int getIdRole() {

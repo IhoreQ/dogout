@@ -1,10 +1,8 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "addresses", schema = "public", catalog = "dogout")
@@ -34,6 +32,6 @@ public class Address {
     @JoinColumn(name = "city", referencedColumnName = "id_city", nullable = false)
     private City citiesByCity;
 
-    @OneToMany(mappedBy = "addressesByIdAddress")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "addressesByIdAddress")
     private Collection<Place> placesByIdAddress;
 }

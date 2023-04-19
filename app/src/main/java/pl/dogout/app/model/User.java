@@ -1,20 +1,10 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-
 @Entity
 @Table(name = "users", schema = "public", catalog = "dogout")
 public class User {
@@ -35,16 +25,16 @@ public class User {
     @Basic
     @Column(name = "has_dog")
     private boolean hasDog;
-    @OneToMany(mappedBy = "usersByIdUser")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usersByIdUser")
     private Collection<ActiveWalk> activeWalksByIdUser;
-    @OneToMany(mappedBy = "usersByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
     private Collection<Dog> dogsByIdUser;
-    @OneToMany(mappedBy = "usersByIdUser")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usersByIdUser")
     private Collection<NewPlaceIdea> newPlacesIdeasByIdUser;
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", nullable = false)
     private Role rolesByIdRole;
-    @OneToMany(mappedBy = "usersByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
     private Collection<UsersDetails> usersDetailsByIdUser;
 
     @Override
@@ -58,6 +48,26 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(idUser, email, password, createdAt, hasDog);
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public boolean isHasDog() {
+        return hasDog;
     }
 
     public Collection<ActiveWalk> getActiveWalksByIdUser() {

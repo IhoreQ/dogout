@@ -1,9 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
+import AuthenticateUser from '../../api/auth/AuthenticateUser';
 
 const LoginForm = ({setMessage}) => {
+
+    const navigate = useNavigate();
 
     const [userInfo, setUserInfo] = React.useState({
         email: "",
@@ -29,7 +32,7 @@ const LoginForm = ({setMessage}) => {
         return userInfo.password.length >= 6;
     }
 
-    const login = (event) => {
+    const loginClicked = async (event) => {
         event.preventDefault();
 
         if (!validateEmail()) {
@@ -39,23 +42,23 @@ const LoginForm = ({setMessage}) => {
             setMessage("Password is too short!");
         }
         else {
-
             // TODO proces logowania
-            fetch(
-                "http://localhost:8080/api/auth/login", {
-                    method: "POST",
-                    headers: {"Content-Type":"application/json"},
-                    body: JSON.stringify(userInfo)
-                }
-            ).then(() => {
-                console.log("Poszlo.");
-            })
 
-            setUserInfo({
-                email: "",
-                password: ""
-            })
-            setMessage("");
+            const res = await AuthenticateUser(userInfo);
+            console.log(res.data);
+
+            if (res.status === 200) {
+                setUserInfo({
+                    email: "",
+                    password: ""
+                })
+                setMessage("");
+        
+                navigate("/home");
+            } else {
+                console.log("Error");
+            }
+            
         }
     }
 
@@ -72,7 +75,7 @@ const LoginForm = ({setMessage}) => {
             <div className="forgot-password-text-container">
                 <span className="forgot-password-text">Forgot password</span>
             </div>
-            <button onClick={login} type="submit" className="blue-button">Log in</button>
+            <button onClick={loginClicked} type="submit" className="blue-button">Log in</button>
             <div className="sign-up-text">
                 Don't have an account? <span><Link to="/signup">Sign up</Link></span>
             </div>

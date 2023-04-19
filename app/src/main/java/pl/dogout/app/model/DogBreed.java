@@ -1,10 +1,6 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -21,7 +17,7 @@ public class DogBreed {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "dogsBreedByIdBreed")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dogsBreedByIdBreed")
     private Collection<Dog> dogsByIdDogBreed;
     @ManyToOne
     @JoinColumn(name = "id_dog_size", referencedColumnName = "id_dog_size")

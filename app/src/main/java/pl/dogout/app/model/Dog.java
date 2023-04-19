@@ -1,10 +1,6 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Objects;
 
@@ -40,6 +36,14 @@ public class Dog {
     private User usersByIdUser;
 
     public Dog() {}
+
+    public Dog(String name, int age, boolean gender, String description, DogBreed dogsBreedByIdBreed) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.description = description;
+        this.dogsBreedByIdBreed = dogsBreedByIdBreed;
+    }
 
     public Dog(Long idDog, String name, int age, boolean gender, String description, String photo, DogBreed dogsBreedByIdBreed, User usersByIdUser) {
         this.idDog = idDog;

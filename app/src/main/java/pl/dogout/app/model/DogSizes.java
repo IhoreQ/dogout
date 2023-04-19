@@ -1,10 +1,6 @@
-package pl.dogout.app.models;
+package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -19,7 +15,7 @@ public class DogSizes {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "dogsSizesByIdDogSize")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dogsSizesByIdDogSize")
     private Collection<DogBreed> dogsBreedsByIdDogSize;
 
     public int getIdDogSize() {
