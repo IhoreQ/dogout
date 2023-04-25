@@ -1,7 +1,13 @@
 package pl.dogout.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import pl.dogout.app.dto.requests.UserAddRequest;
+import pl.dogout.app.model.User;
+import pl.dogout.app.model.UserDetails;
+import pl.dogout.app.repository.UserDetailsRepository;
 import pl.dogout.app.repository.UserRepository;
 
 
@@ -9,9 +15,26 @@ import pl.dogout.app.repository.UserRepository;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final UserDetailsRepository userDetailsRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, UserDetailsRepository userDetailsRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.userDetailsRepository = userDetailsRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
+    public User addUser(UserAddRequest request) {
+
+        User user = new User(request.email(), new UserDetails(request.firstName(), request.lastName()));
+        user.setPassword(passwordEncoder.encode(request.password()));
+
+        return userRepository.save(user);
+    }
+
+    public boolean userExists(UserAddRequest request) {
+        return userRepository.existsByEmail(request.email());
+    }
+
 }

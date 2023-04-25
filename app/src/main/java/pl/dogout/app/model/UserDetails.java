@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users_details", schema = "public", catalog = "dogout")
-public class UsersDetails {
+public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_user_details")
@@ -18,12 +18,19 @@ public class UsersDetails {
     @Column(name = "surname")
     private String surname;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
-    private User usersByIdUser;
+    @OneToOne(mappedBy = "userDetails")
+    private User user;
     @ManyToOne
     @JoinColumn(name = "id_city", referencedColumnName = "id_city", nullable = false)
-    private City citiesByIdCity;
+    private City city;
+
+    public UserDetails() {}
+
+    public UserDetails(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+        this.city = new City(1);
+    }
 
     public int getIdUserDetails() {
         return idUserDetails;
@@ -53,7 +60,7 @@ public class UsersDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsersDetails that = (UsersDetails) o;
+        UserDetails that = (UserDetails) o;
         return idUserDetails == that.idUserDetails && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
     }
 
@@ -62,19 +69,4 @@ public class UsersDetails {
         return Objects.hash(idUserDetails, name, surname);
     }
 
-    public User getUsersByIdUser() {
-        return usersByIdUser;
-    }
-
-    public void setUsersByIdUser(User usersByIdUser) {
-        this.usersByIdUser = usersByIdUser;
-    }
-
-    public City getCitiesByIdCity() {
-        return citiesByIdCity;
-    }
-
-    public void setCitiesByIdCity(City citiesByIdCity) {
-        this.citiesByIdCity = citiesByIdCity;
-    }
 }

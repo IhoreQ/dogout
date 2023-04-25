@@ -1,10 +1,14 @@
 package pl.dogout.app.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Objects;
+
 @Entity
 @Table(name = "users", schema = "public", catalog = "dogout")
 public class User {
@@ -34,8 +38,19 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", nullable = false)
     private Role rolesByIdRole;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
-    private Collection<UsersDetails> usersDetailsByIdUser;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user_details", referencedColumnName = "id_user_details", nullable = false)
+    private UserDetails userDetails;
+
+    public User() {}
+
+    public User(String email, UserDetails userDetails) {
+        this.email = email;
+        this.hasDog = false;
+        this.createdAt = new Date(System.currentTimeMillis());
+        this.rolesByIdRole = new Role(1);
+        this.userDetails = userDetails;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -102,11 +117,7 @@ public class User {
         this.rolesByIdRole = rolesByIdRole;
     }
 
-    public Collection<UsersDetails> getUsersDetailsByIdUser() {
-        return usersDetailsByIdUser;
-    }
-
-    public void setUsersDetailsByIdUser(Collection<UsersDetails> usersDetailsByIdUser) {
-        this.usersDetailsByIdUser = usersDetailsByIdUser;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -20,8 +20,14 @@ public class City {
     private Collection<Address> addressesByIdCity;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "citiesByIdCity")
     private Collection<Place> placesByIdCity;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "citiesByIdCity")
-    private Collection<UsersDetails> usersDetailsByIdCity;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+    private Collection<UserDetails> usersDetailsByIdCity;
+
+    public City() {}
+
+    public City(int idCity) {
+        this.idCity = idCity;
+    }
 
     public int getIdCity() {
         return idCity;
@@ -68,11 +74,11 @@ public class City {
         this.placesByIdCity = placesByIdCity;
     }
 
-    public Collection<UsersDetails> getUsersDetailsByIdCity() {
+    public Collection<UserDetails> getUsersDetailsByIdCity() {
         return usersDetailsByIdCity;
     }
 
-    public void setUsersDetailsByIdCity(Collection<UsersDetails> usersDetailsByIdCity) {
+    public void setUsersDetailsByIdCity(Collection<UserDetails> usersDetailsByIdCity) {
         this.usersDetailsByIdCity = usersDetailsByIdCity;
     }
 }

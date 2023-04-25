@@ -18,6 +18,12 @@ public class Role {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "rolesByIdRole")
     private Collection<User> usersByIdRole;
 
+    public Role() {}
+
+    public Role(int idRole) {
+        this.idRole = idRole;
+    }
+
     public int getIdRole() {
         return idRole;
     }
