@@ -3,6 +3,7 @@ package pl.dogout.app.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
 import java.time.LocalTime;
@@ -10,12 +11,13 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@DynamicUpdate
 @Table(name = "users", schema = "public", catalog = "dogout")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_user")
-    private int idUser;
+    private Long idUser;
     @Basic
     @Column(name = "email")
     private String email;
@@ -65,7 +67,7 @@ public class User {
         return Objects.hash(idUser, email, password, createdAt, hasDog);
     }
 
-    public int getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
@@ -81,8 +83,12 @@ public class User {
         return createdAt;
     }
 
-    public boolean isHasDog() {
+    public boolean hasDog() {
         return hasDog;
+    }
+
+    public void setHasDog(boolean hasDog) {
+        this.hasDog = hasDog;
     }
 
     public Collection<ActiveWalk> getActiveWalksByIdUser() {

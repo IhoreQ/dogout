@@ -8,11 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import pl.dogout.app.dto.requests.LoginRequest;
-import pl.dogout.app.dto.requests.UserAddRequest;
-import pl.dogout.app.dto.responses.JwtTokenResponse;
+import pl.dogout.app.dto.request.LoginRequest;
+import pl.dogout.app.dto.request.UserAddRequest;
+import pl.dogout.app.dto.response.JwtTokenResponse;
 import pl.dogout.app.model.User;
-import pl.dogout.app.repository.UserRepository;
 import pl.dogout.app.service.AuthService;
 import pl.dogout.app.service.JwtService;
 
@@ -34,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public JwtTokenResponse authenticateUser(@RequestBody LoginRequest loginRequest) throws UsernameNotFoundException{
+    public JwtTokenResponse authenticateUser(@RequestBody LoginRequest loginRequest) throws UsernameNotFoundException {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
 
@@ -52,7 +51,6 @@ public class AuthController {
         }
 
         User user = authService.addUser(request);
-
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 

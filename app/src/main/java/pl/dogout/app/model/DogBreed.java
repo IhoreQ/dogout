@@ -32,6 +32,10 @@ public class DogBreed {
         return idDogBreed == dogBreed.idDogBreed && Objects.equals(name, dogBreed.name);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Collection<Dog> getDogsByIdDogBreed() {
         return dogsByIdDogBreed;
     }

@@ -4,8 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.dogout.app.model.Dog;
+import pl.dogout.app.model.DogBreed;
+import pl.dogout.app.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DogRepository extends JpaRepository<Dog, Long> {
@@ -17,4 +20,6 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
             "JOIN u.activeWalksByIdUser aw " +
             "WHERE aw.placesByIdPlace.idPlace = 2")
     List<Dog> getDogsFromPlace();
+
+    Optional<Dog> findByUsersByIdUser(User user);
 }

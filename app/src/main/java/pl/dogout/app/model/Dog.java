@@ -37,12 +37,14 @@ public class Dog {
 
     public Dog() {}
 
-    public Dog(String name, int age, boolean gender, String description, DogBreed dogsBreedByIdBreed) {
+    public Dog(String name, int age, boolean gender, String description, DogBreed dogsBreedByIdBreed, String photo, User usersByIdUser) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.description = description;
         this.dogsBreedByIdBreed = dogsBreedByIdBreed;
+        this.photo = photo;
+        this.usersByIdUser = usersByIdUser;
     }
 
     public Dog(Long idDog, String name, int age, boolean gender, String description, String photo, DogBreed dogsBreedByIdBreed, User usersByIdUser) {
@@ -60,12 +62,28 @@ public class Dog {
         return name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public boolean getGender() {
+        return gender;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dog dog = (Dog) o;
-        return idDog == dog.idDog && age == dog.age && gender == dog.gender && Objects.equals(name, dog.name) && Objects.equals(description, dog.description) && Objects.equals(photo, dog.photo);
+        return idDog.equals(dog.idDog) && age == dog.age && gender == dog.gender && Objects.equals(name, dog.name) && Objects.equals(description, dog.description) && Objects.equals(photo, dog.photo);
     }
 
     @Override
