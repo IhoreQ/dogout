@@ -33,6 +33,10 @@ public class Place {
 
     public Place() {}
 
+    public Place(int idPlace) {
+        this.idPlace = idPlace;
+    }
+
     public Place(int idPlace, String name, String photo) {
         this.idPlace = idPlace;
         this.name = name;

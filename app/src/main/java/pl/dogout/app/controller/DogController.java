@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dogout.app.dto.mapper.DogInfoMapper;
+import pl.dogout.app.dto.mapper.DogMapper;
 import pl.dogout.app.dto.request.DogAddRequest;
 import pl.dogout.app.dto.response.DogInfoResponse;
 import pl.dogout.app.model.Dog;
@@ -21,13 +21,13 @@ public class DogController {
 
     private final DogService dogService;
     private final UserService userService;
-    private final DogInfoMapper dogInfoMapper;
+    private final DogMapper dogInfoMapper;
 
     @Autowired
     public DogController(DogService dogService, UserService userService) {
         this.dogService = dogService;
         this.userService = userService;
-        this.dogInfoMapper = new DogInfoMapper();
+        this.dogInfoMapper = new DogMapper();
     }
 
     @PostMapping

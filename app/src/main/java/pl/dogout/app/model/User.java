@@ -31,7 +31,7 @@ public class User {
     @Basic
     @Column(name = "has_dog")
     private boolean hasDog;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usersByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
     private Collection<ActiveWalk> activeWalksByIdUser;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
     private Collection<Dog> dogsByIdUser;
@@ -45,6 +45,10 @@ public class User {
     private UserDetails userDetails;
 
     public User() {}
+
+    public User(Long idUser) {
+        this.idUser = idUser;
+    }
 
     public User(String email, UserDetails userDetails) {
         this.email = email;

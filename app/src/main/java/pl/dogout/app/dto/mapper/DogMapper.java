@@ -3,7 +3,7 @@ package pl.dogout.app.dto.mapper;
 import pl.dogout.app.dto.response.DogInfoResponse;
 import pl.dogout.app.model.Dog;
 
-public class DogInfoMapper {
+public class DogMapper {
 
     public DogInfoResponse getDogInfoResponse(Dog dog) {
 
