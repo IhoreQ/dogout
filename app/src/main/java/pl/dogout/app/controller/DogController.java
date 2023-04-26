@@ -58,11 +58,6 @@ public class DogController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{placeId}")
-    public List<Dog> getAllDogsFromPlace(@PathVariable Long placeId) {
-        return dogService.getDogsFromPlace(placeId);
-    }
-
     @DeleteMapping
     public ResponseEntity<HttpStatus> deleteDog(@RequestParam String email) {
         User user = userService.getUserByEmail(email);

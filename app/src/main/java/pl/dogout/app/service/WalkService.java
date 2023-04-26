@@ -2,19 +2,17 @@ package pl.dogout.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.dogout.app.dto.mapper.WalkMapper;
-import pl.dogout.app.dto.response.UserActiveWalkResponse;
 import pl.dogout.app.model.ActiveWalk;
+import pl.dogout.app.model.Dog;
+import pl.dogout.app.model.Place;
 import pl.dogout.app.model.User;
 import pl.dogout.app.repository.DogRepository;
 import pl.dogout.app.repository.PlaceRepository;
 import pl.dogout.app.repository.UserRepository;
 import pl.dogout.app.repository.WalkRepository;
 
-import java.sql.Time;
-import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -69,5 +67,20 @@ public class WalkService {
 
     public void saveWalk(ActiveWalk activeWalk) {
         walkRepository.save(activeWalk);
+    }
+
+    public List<Dog> getDogsFromPlace(Long placeId) {
+        Place place = new Place(placeId);
+
+        List<ActiveWalk> activeWalks = walkRepository.findAllByPlacesByIdPlace(place);
+
+        List<Dog> dogs = activeWalks.stream().map(walk -> walk.getUsersByIdUser()
+                        .getDogsByIdUser()
+                        .stream()
+                        .findFirst()
+                        .get())
+                .toList();
+
+        return dogs;
     }
 }

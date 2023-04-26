@@ -11,7 +11,7 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_place")
-    private int idPlace;
+    private Long idPlace;
     @Basic
     @Column(name = "name")
     private String name;
@@ -33,17 +33,17 @@ public class Place {
 
     public Place() {}
 
-    public Place(int idPlace) {
+    public Place(Long idPlace) {
         this.idPlace = idPlace;
     }
 
-    public Place(int idPlace, String name, String photo) {
+    public Place(Long idPlace, String name, String photo) {
         this.idPlace = idPlace;
         this.name = name;
         this.photo = photo;
     }
 
-    public int getIdPlace() {
+    public Long getIdPlace() {
         return idPlace;
     }
 
@@ -60,7 +60,7 @@ public class Place {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Place place = (Place) o;
-        return idPlace == place.idPlace && Objects.equals(name, place.name) && Objects.equals(photo, place.photo);
+        return idPlace.equals(place.idPlace) && Objects.equals(name, place.name) && Objects.equals(photo, place.photo);
     }
 
     @Override
