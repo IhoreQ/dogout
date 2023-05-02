@@ -10,7 +10,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_address")
-    private int idAddress;
+    private Long idAddress;
 
     @Basic
     @Column(name = "postal_code")
@@ -30,8 +30,20 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "city", referencedColumnName = "id_city", nullable = false)
-    private City citiesByCity;
+    private City city;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "addressesByIdAddress")
-    private Collection<Place> placesByIdAddress;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
+    private Collection<Place> places;
+
+    public Address() {}
+
+    public Address(Long idAddress, String postalCode, String street, String homeNumber, String country, City city, Collection<Place> places) {
+        this.idAddress = idAddress;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.homeNumber = homeNumber;
+        this.country = country;
+        this.city = city;
+        this.places = places;
+    }
 }

@@ -23,6 +23,7 @@ public class UserService {
     }
 
     public void changeHasDogState(User user) {
+        // TODO usun to
         boolean actualState = user.hasDog();
         user.setHasDog(!actualState);
         userRepository.save(user);

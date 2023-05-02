@@ -11,7 +11,7 @@ public class NewPlaceIdea {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_new_place_idea")
-    private int idNewPlaceIdea;
+    private Long idNewPlaceIdea;
     @Basic
     @Column(name = "city")
     private String city;
@@ -24,27 +24,15 @@ public class NewPlaceIdea {
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
-    private User usersByIdUser;
+    private User user;
 
+    public NewPlaceIdea() {}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NewPlaceIdea that = (NewPlaceIdea) o;
-        return idNewPlaceIdea == that.idNewPlaceIdea && Objects.equals(city, that.city) && Objects.equals(name, that.name) && Objects.equals(street, that.street);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idNewPlaceIdea, city, name, street);
-    }
-
-    public User getUsersByIdUser() {
-        return usersByIdUser;
-    }
-
-    public void setUsersByIdUser(User usersByIdUser) {
-        this.usersByIdUser = usersByIdUser;
+    public NewPlaceIdea(Long idNewPlaceIdea, String city, String name, String street, User user) {
+        this.idNewPlaceIdea = idNewPlaceIdea;
+        this.city = city;
+        this.name = name;
+        this.street = street;
+        this.user = user;
     }
 }

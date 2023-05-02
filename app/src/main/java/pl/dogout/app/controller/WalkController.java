@@ -1,7 +1,6 @@
 package pl.dogout.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dogout.app.dto.mapper.DogMapper;
@@ -15,9 +14,7 @@ import pl.dogout.app.model.User;
 import pl.dogout.app.service.UserService;
 import pl.dogout.app.service.WalkService;
 
-import java.time.Duration;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -68,6 +65,8 @@ public class WalkController {
     @GetMapping("/{placeId}")
     public List<DogInfoResponse> getAllDogsFromPlace(@PathVariable Long placeId) {
         List<Dog> dogs = walkService.getDogsFromPlace(placeId);
-        return dogs.stream().map(dogMapper::getDogInfoResponse).toList();
+        return dogs.stream()
+                .map(dogMapper::getDogInfoResponse)
+                .toList();
     }
 }

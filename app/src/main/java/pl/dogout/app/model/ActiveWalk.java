@@ -1,13 +1,8 @@
 package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-import org.springframework.cglib.core.Local;
 
-import java.sql.Time;
-import java.time.Duration;
 import java.time.LocalTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "active_walks", schema = "public", catalog = "dogout")
@@ -26,31 +21,27 @@ public class ActiveWalk {
 
     @ManyToOne
     @JoinColumn(name = "id_place", referencedColumnName = "id_place", nullable = false)
-    private Place placesByIdPlace;
+    private Place place;
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
-    private User usersByIdUser;
+    private User user;
 
-    public ActiveWalk() {}
+    public ActiveWalk() {
+    }
 
-    public ActiveWalk(String timeOfWalk, LocalTime startedAt, Place placesByIdPlace, User usersByIdUser) {
+    public ActiveWalk(String timeOfWalk, LocalTime startedAt, Place place, User user) {
         this.timeOfWalk = timeOfWalk;
         this.startedAt = startedAt;
-        this.placesByIdPlace = placesByIdPlace;
-        this.usersByIdUser = usersByIdUser;
+        this.place = place;
+        this.user = user;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActiveWalk that = (ActiveWalk) o;
-        return idActiveWalk.equals(that.idActiveWalk) && Objects.equals(timeOfWalk, that.timeOfWalk) && Objects.equals(startedAt, that.startedAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idActiveWalk, timeOfWalk, startedAt);
+    public ActiveWalk(Long idActiveWalk, String timeOfWalk, LocalTime startedAt, Place place, User user) {
+        this.idActiveWalk = idActiveWalk;
+        this.timeOfWalk = timeOfWalk;
+        this.startedAt = startedAt;
+        this.place = place;
+        this.user = user;
     }
 
     public Long getIdActiveWalk() {
@@ -65,19 +56,11 @@ public class ActiveWalk {
         return startedAt;
     }
 
-    public Place getPlacesByIdPlace() {
-        return placesByIdPlace;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setPlacesByIdPlace(Place placesByIdPlace) {
-        this.placesByIdPlace = placesByIdPlace;
-    }
-
-    public User getUsersByIdUser() {
-        return usersByIdUser;
-    }
-
-    public void setUsersByIdUser(User usersByIdUser) {
-        this.usersByIdUser = usersByIdUser;
+    public User getUser() {
+        return user;
     }
 }

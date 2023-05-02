@@ -1,14 +1,10 @@
 package pl.dogout.app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
-import java.time.LocalTime;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @DynamicUpdate
@@ -31,18 +27,19 @@ public class User {
     @Basic
     @Column(name = "has_dog")
     private boolean hasDog;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
-    private Collection<ActiveWalk> activeWalksByIdUser;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usersByIdUser")
-    private Collection<Dog> dogsByIdUser;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usersByIdUser")
-    private Collection<NewPlaceIdea> newPlacesIdeasByIdUser;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Collection<ActiveWalk> activeWalks;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    private Collection<Dog> dogs;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Collection<NewPlaceIdea> newPlacesIdeas;
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", nullable = false)
-    private Role rolesByIdRole;
+    private Role role;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_details", referencedColumnName = "id_user_details", nullable = false)
-    private UserDetails userDetails;
+    private UserDetails details;
 
     public User() {}
 
@@ -50,29 +47,25 @@ public class User {
         this.idUser = idUser;
     }
 
-    public User(String email, UserDetails userDetails) {
+    public User(String email, UserDetails details) {
         this.email = email;
         this.hasDog = false;
         this.createdAt = new Date(System.currentTimeMillis());
-        this.rolesByIdRole = new Role(1);
-        this.userDetails = userDetails;
+        this.role = new Role(1L);
+        this.details = details;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return idUser == user.idUser && hasDog == user.hasDog && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(createdAt, user.createdAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idUser, email, password, createdAt, hasDog);
-    }
-
-    public Long getIdUser() {
-        return idUser;
+    public User(Long idUser, String email, String password, Date createdAt, boolean hasDog, Collection<ActiveWalk> activeWalks, Collection<Dog> dogs, Collection<NewPlaceIdea> newPlacesIdeas, Role role, UserDetails details) {
+        this.idUser = idUser;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.hasDog = hasDog;
+        this.activeWalks = activeWalks;
+        this.dogs = dogs;
+        this.newPlacesIdeas = newPlacesIdeas;
+        this.role = role;
+        this.details = details;
     }
 
     public String getEmail() {
@@ -83,10 +76,6 @@ public class User {
         return password;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
     public boolean hasDog() {
         return hasDog;
     }
@@ -95,36 +84,16 @@ public class User {
         this.hasDog = hasDog;
     }
 
-    public Collection<ActiveWalk> getActiveWalksByIdUser() {
-        return activeWalksByIdUser;
+    public Collection<ActiveWalk> getActiveWalks() {
+        return activeWalks;
     }
 
-    public void setActiveWalksByIdUser(Collection<ActiveWalk> activeWalksByIdUser) {
-        this.activeWalksByIdUser = activeWalksByIdUser;
+    public Collection<Dog> getDogs() {
+        return dogs;
     }
 
-    public Collection<Dog> getDogsByIdUser() {
-        return dogsByIdUser;
-    }
-
-    public void setDogsByIdUser(Collection<Dog> dogsByIdUser) {
-        this.dogsByIdUser = dogsByIdUser;
-    }
-
-    public Collection<NewPlaceIdea> getNewPlacesIdeasByIdUser() {
-        return newPlacesIdeasByIdUser;
-    }
-
-    public void setNewPlacesIdeasByIdUser(Collection<NewPlaceIdea> newPlacesIdeasByIdUser) {
-        this.newPlacesIdeasByIdUser = newPlacesIdeasByIdUser;
-    }
-
-    public Role getRolesByIdRole() {
-        return rolesByIdRole;
-    }
-
-    public void setRolesByIdRole(Role rolesByIdRole) {
-        this.rolesByIdRole = rolesByIdRole;
+    public Role getRole() {
+        return role;
     }
 
     public void setPassword(String password) {

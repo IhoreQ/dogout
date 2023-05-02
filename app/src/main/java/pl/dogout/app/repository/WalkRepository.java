@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface WalkRepository extends JpaRepository<ActiveWalk, Long> {
 
-    List<ActiveWalk> findAllByPlacesByIdPlace(Place placesByIdPlace);
+    List<ActiveWalk> findAllByPlace(Place place);
 
-    Optional<ActiveWalk> findByUsersByIdUser(User user);
+    Optional<ActiveWalk> findByUser(User user);
 }

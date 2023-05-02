@@ -12,6 +12,7 @@ import pl.dogout.app.repository.UserRepository;
 import pl.dogout.app.repository.WalkRepository;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class WalkService {
 
 
     public ActiveWalk getActiveWalkByUser(User user) {
-        Optional<ActiveWalk> walk = user.getActiveWalksByIdUser().stream().findFirst();
+        Optional<ActiveWalk> walk = user.getActiveWalks().stream().findFirst();
         ActiveWalk activeWalk;
 
         if (walk.isEmpty())
@@ -58,7 +59,7 @@ public class WalkService {
         LocalTime startedAt = activeWalk.getStartedAt();
         LocalTime duration = LocalTime.parse(activeWalk.getTimeOfWalk());
 
-        LocalTime endTime = now.plusHours(duration.getHour())
+        LocalTime endTime = startedAt.plusHours(duration.getHour())
                 .plusMinutes(duration.getMinute())
                 .plusSeconds(duration.getSecond());
 
@@ -72,15 +73,23 @@ public class WalkService {
     public List<Dog> getDogsFromPlace(Long placeId) {
         Place place = new Place(placeId);
 
-        List<ActiveWalk> activeWalks = walkRepository.findAllByPlacesByIdPlace(place);
+        List<ActiveWalk> activeWalks = walkRepository.findAllByPlace(place);
 
-        List<Dog> dogs = activeWalks.stream().map(walk -> walk.getUsersByIdUser()
-                        .getDogsByIdUser()
+        List<ActiveWalk> activeWalksAfterTheGreatPurge = new ArrayList<>();
+
+        for (ActiveWalk activeWalk : activeWalks) {
+            if (checkIfTimeExceeded(activeWalk))
+                finishWalk(activeWalk);
+            else
+                activeWalksAfterTheGreatPurge.add(activeWalk);
+
+        }
+
+        return activeWalksAfterTheGreatPurge.stream().map(walk -> walk.getUser()
+                        .getDogs()
                         .stream()
                         .findFirst()
                         .get())
                 .toList();
-
-        return dogs;
     }
 }

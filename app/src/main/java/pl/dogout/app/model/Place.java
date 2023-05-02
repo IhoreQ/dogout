@@ -3,7 +3,6 @@ package pl.dogout.app.model;
 import jakarta.persistence.*;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "places", schema = "public", catalog = "dogout")
@@ -20,18 +19,19 @@ public class Place {
     @Column(name = "photo")
     private String photo;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "placesByIdPlace")
-    private Collection<ActiveWalk> activeWalksByIdPlace;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "place")
+    private Collection<ActiveWalk> activeWalks;
 
     @ManyToOne
     @JoinColumn(name = "id_address", referencedColumnName = "id_address", nullable = false)
-    private Address addressesByIdAddress;
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "id_city", referencedColumnName = "id_city", nullable = false)
-    private City citiesByIdCity;
+    private City city;
 
-    public Place() {}
+    public Place() {
+    }
 
     public Place(Long idPlace) {
         this.idPlace = idPlace;
@@ -43,8 +43,13 @@ public class Place {
         this.photo = photo;
     }
 
-    public Long getIdPlace() {
-        return idPlace;
+    public Place(Long idPlace, String name, String photo, Collection<ActiveWalk> activeWalks, Address address, City city) {
+        this.idPlace = idPlace;
+        this.name = name;
+        this.photo = photo;
+        this.activeWalks = activeWalks;
+        this.address = address;
+        this.city = city;
     }
 
     public String getName() {
@@ -55,40 +60,7 @@ public class Place {
         return photo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Place place = (Place) o;
-        return idPlace.equals(place.idPlace) && Objects.equals(name, place.name) && Objects.equals(photo, place.photo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPlace, name, photo);
-    }
-
-    public Collection<ActiveWalk> getActiveWalksByIdPlace() {
-        return activeWalksByIdPlace;
-    }
-
-    public void setActiveWalksByIdPlace(Collection<ActiveWalk> activeWalksByIdPlace) {
-        this.activeWalksByIdPlace = activeWalksByIdPlace;
-    }
-
-    public Address getAddressesByIdAddress() {
-        return addressesByIdAddress;
-    }
-
-    public void setAddressesByIdAddress(Address addressesByIdAddress) {
-        this.addressesByIdAddress = addressesByIdAddress;
-    }
-
-    public City getCitiesByIdCity() {
-        return citiesByIdCity;
-    }
-
-    public void setCitiesByIdCity(City citiesByIdCity) {
-        this.citiesByIdCity = citiesByIdCity;
+    public Collection<ActiveWalk> getActiveWalks() {
+        return activeWalks;
     }
 }

@@ -12,43 +12,32 @@ public class DogBreed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_dog_breed")
-    private int idDogBreed;
+    private Long idDogBreed;
     @Basic
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dogsBreedByIdBreed")
-    private Collection<Dog> dogsByIdDogBreed;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "breed")
+    private Collection<Dog> dogsByBreed;
     @ManyToOne
     @JoinColumn(name = "id_dog_size", referencedColumnName = "id_dog_size")
-    private DogSizes dogsSizesByIdDogSize;
+    private DogSize size;
 
+    public DogBreed() {}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DogBreed dogBreed = (DogBreed) o;
-        return idDogBreed == dogBreed.idDogBreed && Objects.equals(name, dogBreed.name);
+    public DogBreed(Long idDogBreed, String name, Collection<Dog> dogsByBreed, DogSize size) {
+        this.idDogBreed = idDogBreed;
+        this.name = name;
+        this.dogsByBreed = dogsByBreed;
+        this.size = size;
     }
 
     public String getName() {
         return name;
     }
 
-    public Collection<Dog> getDogsByIdDogBreed() {
-        return dogsByIdDogBreed;
+    public DogSize getSize() {
+        return size;
     }
 
-    public void setDogsByIdDogBreed(Collection<Dog> dogsByIdDogBreed) {
-        this.dogsByIdDogBreed = dogsByIdDogBreed;
-    }
-
-    public DogSizes getDogsSizesByIdDogSize() {
-        return dogsSizesByIdDogSize;
-    }
-
-    public void setDogsSizesByIdDogSize(DogSizes dogsSizesByIdDogSize) {
-        this.dogsSizesByIdDogSize = dogsSizesByIdDogSize;
-    }
 }

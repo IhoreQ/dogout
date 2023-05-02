@@ -8,7 +8,7 @@ import pl.dogout.app.model.Place;
 public class WalkMapper {
 
     public UserActiveWalkResponse getUserActiveWalkResponse(ActiveWalk activeWalk) {
-        return new UserActiveWalkResponse(activeWalk.getIdActiveWalk(), activeWalk.getStartedAt(), activeWalk.getPlacesByIdPlace().getName());
+        return new UserActiveWalkResponse(activeWalk.getIdActiveWalk(), activeWalk.getStartedAt(), activeWalk.getPlace().getName());
     }
 
     public PlaceWalksResponse getPlaceWalksResponse(ActiveWalk activeWalk, Place place) {

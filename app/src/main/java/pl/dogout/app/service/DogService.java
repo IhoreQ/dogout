@@ -27,7 +27,7 @@ public class DogService {
     }
 
     public Dog getDogInfo(User user) {
-        Optional<Dog> dog = dogRepository.findByUsersByIdUser(user);
+        Optional<Dog> dog = dogRepository.findByOwner(user);
         return dog.orElse(null);
     }
 
@@ -40,7 +40,7 @@ public class DogService {
         if (!user.hasDog())
             return false;
 
-        Optional<Dog> foundDog = dogRepository.findByUsersByIdUser(user);
+        Optional<Dog> foundDog = dogRepository.findByOwner(user);
 
         if (foundDog.isPresent()) {
             userService.changeHasDogState(user);
@@ -68,7 +68,7 @@ public class DogService {
             return true;
         }
 
-       return false;
+        return false;
     }
 
 }

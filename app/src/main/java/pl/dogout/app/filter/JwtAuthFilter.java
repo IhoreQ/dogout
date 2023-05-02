@@ -12,7 +12,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pl.dogout.app.config.user.UserDetailsConfigService;
-import pl.dogout.app.model.User;
 import pl.dogout.app.service.JwtService;
 
 import java.io.IOException;

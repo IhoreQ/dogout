@@ -30,32 +30,33 @@ public class Dog {
 
     @ManyToOne
     @JoinColumn(name = "id_breed", referencedColumnName = "id_dog_breed", nullable = false)
-    private DogBreed dogsBreedByIdBreed;
+    private DogBreed breed;
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
-    private User usersByIdUser;
+    private User owner;
 
-    public Dog() {}
+    public Dog() {
+    }
 
-    public Dog(String name, int age, boolean gender, String description, DogBreed dogsBreedByIdBreed, String photo, User usersByIdUser) {
+    public Dog(String name, int age, boolean gender, String description, DogBreed breed, String photo, User owner) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.description = description;
-        this.dogsBreedByIdBreed = dogsBreedByIdBreed;
+        this.breed = breed;
         this.photo = photo;
-        this.usersByIdUser = usersByIdUser;
+        this.owner = owner;
     }
 
-    public Dog(Long idDog, String name, int age, boolean gender, String description, String photo, DogBreed dogsBreedByIdBreed, User usersByIdUser) {
+    public Dog(Long idDog, String name, int age, boolean gender, String description, String photo, DogBreed breed, User owner) {
         this.idDog = idDog;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.description = description;
         this.photo = photo;
-        this.dogsBreedByIdBreed = dogsBreedByIdBreed;
-        this.usersByIdUser = usersByIdUser;
+        this.breed = breed;
+        this.owner = owner;
     }
 
     public String getName() {
@@ -78,32 +79,11 @@ public class Dog {
         return photo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dog dog = (Dog) o;
-        return idDog.equals(dog.idDog) && age == dog.age && gender == dog.gender && Objects.equals(name, dog.name) && Objects.equals(description, dog.description) && Objects.equals(photo, dog.photo);
+    public DogBreed getBreed() {
+        return breed;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idDog, name, age, gender, description, photo);
-    }
-
-    public DogBreed getDogsBreedByIdBreed() {
-        return dogsBreedByIdBreed;
-    }
-
-    public void setDogsBreedByIdBreed(DogBreed dogsBreedByIdBreed) {
-        this.dogsBreedByIdBreed = dogsBreedByIdBreed;
-    }
-
-    public User getUsersByIdUser() {
-        return usersByIdUser;
-    }
-
-    public void setUsersByIdUser(User usersByIdUser) {
-        this.usersByIdUser = usersByIdUser;
+    public User getOwner() {
+        return owner;
     }
 }

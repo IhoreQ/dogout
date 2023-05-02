@@ -12,8 +12,6 @@ import pl.dogout.app.model.User;
 import pl.dogout.app.service.DogService;
 import pl.dogout.app.service.UserService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/dog")
 @CrossOrigin

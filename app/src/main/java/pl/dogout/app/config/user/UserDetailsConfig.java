@@ -18,7 +18,7 @@ public class UserDetailsConfig implements UserDetails {
     public UserDetailsConfig(User user) {
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.authorities.add(new SimpleGrantedAuthority(user.getRolesByIdRole().getRole()));
+        this.authorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
     }
 
     @Override
