@@ -24,7 +24,6 @@ import pl.dogout.app.filter.JwtAuthFilter;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
     private final JwtAuthFilter authFilter;
 
     @Autowired
@@ -36,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/authenticate", "/api/auth/signup").permitAll()
+                .requestMatchers("/api/auth/authenticate", "/api/auth/signup", "/api/image/**").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/api/**")
                 .authenticated().and()

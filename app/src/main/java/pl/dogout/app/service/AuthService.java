@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import pl.dogout.app.dto.request.UserAddRequest;
 import pl.dogout.app.model.User;
 import pl.dogout.app.model.UserDetails;
-import pl.dogout.app.repository.UserDetailsRepository;
 import pl.dogout.app.repository.UserRepository;
 
 
@@ -14,13 +13,11 @@ import pl.dogout.app.repository.UserRepository;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final UserDetailsRepository userDetailsRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthService(UserRepository userRepository, UserDetailsRepository userDetailsRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userDetailsRepository = userDetailsRepository;
         this.passwordEncoder = passwordEncoder;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import pl.dogout.app.dto.request.LoginRequest;
+import pl.dogout.app.dto.request.PasswordUpdateRequest;
 import pl.dogout.app.dto.request.UserAddRequest;
 import pl.dogout.app.dto.response.JwtTokenResponse;
 import pl.dogout.app.model.User;

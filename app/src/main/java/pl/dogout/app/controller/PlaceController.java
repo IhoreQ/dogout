@@ -11,7 +11,7 @@ import pl.dogout.app.service.PlaceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/places")
+@RequestMapping("/api/place")
 @CrossOrigin
 public class PlaceController {
 
@@ -22,7 +22,7 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Place> getALlPlaces() {
         return placeService.getAllPlaces();
     }

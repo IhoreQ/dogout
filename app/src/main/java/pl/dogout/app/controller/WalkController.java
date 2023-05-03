@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dogout.app.dto.mapper.DogMapper;
 import pl.dogout.app.dto.mapper.WalkMapper;
+import pl.dogout.app.dto.request.WalkStartRequest;
 import pl.dogout.app.dto.response.DogInfoResponse;
 import pl.dogout.app.dto.response.UserActiveWalkResponse;
 import pl.dogout.app.model.ActiveWalk;
@@ -15,6 +16,7 @@ import pl.dogout.app.service.UserService;
 import pl.dogout.app.service.WalkService;
 
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -39,10 +41,19 @@ public class WalkController {
     }
 
     @PostMapping
-    public ResponseEntity<String> goForAWalk() {
+    public ResponseEntity<String> goForAWalk(@RequestBody WalkStartRequest request) throws Exception {
 
-        // TODO
-        ActiveWalk activeWalk = new ActiveWalk("01:00:00", LocalTime.now(), new Place(1L), new User(17L));
+        User user = userService.getUserByEmail(request.email());
+
+        if (!user.hasDog()) {
+            throw new Exception("User has no dog!");
+        }
+
+        if (!user.getActiveWalks().isEmpty()) {
+            throw new Exception("User is already on a walk!");
+        }
+
+        ActiveWalk activeWalk = new ActiveWalk(request.timeOfAWalk(), LocalTime.now(), new Place(request.placeId()), user);
 
         walkService.saveWalk(activeWalk);
         return ResponseEntity.ok("Gone");
@@ -68,5 +79,22 @@ public class WalkController {
         return dogs.stream()
                 .map(dogMapper::getDogInfoResponse)
                 .toList();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> finishWalk(@RequestParam String email) throws Exception {
+
+        User user = userService.getUserByEmail(email);
+
+        Collection<ActiveWalk> activeWalks = user.getActiveWalks();
+
+        if (activeWalks.isEmpty()) {
+            throw new Exception("User is not on a walk!");
+        }
+
+        ActiveWalk activeWalk = activeWalks.stream().findFirst().get();
+        walkService.finishWalk(activeWalk);
+
+        return ResponseEntity.ok("Finished.");
     }
 }

@@ -50,7 +50,7 @@ public class WalkService {
         return activeWalk;
     }
 
-    private void finishWalk(ActiveWalk activeWalk) {
+    public void finishWalk(ActiveWalk activeWalk) {
         walkRepository.delete(activeWalk);
     }
 

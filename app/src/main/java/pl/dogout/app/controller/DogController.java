@@ -30,7 +30,6 @@ public class DogController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> addDog(@RequestBody DogAddRequest dogAddRequest) throws Exception {
-        // TODO named exceptions
         User user = userService.getUserByEmail(dogAddRequest.email());
         if (user.hasDog())
             throw new Exception("User already has a dog!");
