@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/components/MainBox.css"
+import "./MainBox.css"
 
 const MainBox = ({children}) => {
     return (

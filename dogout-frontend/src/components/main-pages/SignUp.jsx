@@ -1,5 +1,5 @@
 import React from "react";
-import MainBox from "../MainBox";
+import MainBox from "./MainBox";
 
 const SignUp = () => {
 
@@ -9,7 +9,7 @@ const SignUp = () => {
 
     return (
         <MainBox>
-
+        
         </MainBox>
     )
 }

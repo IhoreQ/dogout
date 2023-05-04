@@ -2,16 +2,17 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
+import BadgeIcon from '@mui/icons-material/Badge';
 import AuthenticateUser from '../../api/auth/AuthenticateUser';
 import SignButton from "../common/SignButton";
 
-import "./LoginForm.css";
-
-const LoginForm = ({setMessage}) => {
+const SignUpForm = ({setMessage}) => {
 
     const navigate = useNavigate();
 
     const [userInfo, setUserInfo] = React.useState({
+        name: "",
+        surname: "",
         email: "",
         password: ""
     });
@@ -35,7 +36,7 @@ const LoginForm = ({setMessage}) => {
         return userInfo.password.length >= 6;
     }
 
-    const loginClicked = async (event) => {
+    const signUpClicked = async (event) => {
         event.preventDefault();
 
         if (!validateEmail() & !validatePassword()) {
@@ -48,7 +49,7 @@ const LoginForm = ({setMessage}) => {
             setMessage("Provided wrong password!");
         }
         else {
-            // TODO proces logowania
+            // TODO proces rejestracji
 
             const res = await AuthenticateUser(userInfo);
             console.log(res.data);
@@ -60,7 +61,7 @@ const LoginForm = ({setMessage}) => {
                 })
                 setMessage("");
         
-                navigate("/home");
+                navigate("/login");
             } else {
                 console.log("Error");
             }
@@ -68,7 +69,15 @@ const LoginForm = ({setMessage}) => {
     }
 
     return (
-        <form className="login-form">
+        <form className="signup-form">
+        <div className="input-div">
+                <BadgeIcon />
+                <input value={userInfo.name} onChange={changeInfo} name="name" type="text" placeholder="Name" />
+            </div>
+            <div className="input-div">
+                <BadgeIcon />
+                <input value={userInfo.surname} onChange={changeInfo} name="surname" type="text" placeholder="Surname" />
+            </div>
             <div className="input-div">
                 <PersonIcon />
                 <input value={userInfo.email} onChange={changeInfo} name="email" type="text" placeholder="Email" />
@@ -77,15 +86,12 @@ const LoginForm = ({setMessage}) => {
                 <LockIcon />
                 <input value={userInfo.password} onChange={changeInfo} name="password" type="password" placeholder="Password" />
             </div>
-            <div className="forgot-password-text-container">
-                <span className="forgot-password-text">Forgot password</span>
-            </div>
-            <SignButton onClick={loginClicked} type="submit">Log in</SignButton>
+            <SignButton onClick={signUpClicked} type="submit">Sign up</SignButton>
             <div className="sign-up-text">
-                Don't have an account? <span><Link to="/signup">Sign up</Link></span>
+                Don't have an account? <span><Link to="/signup">Sign in</Link></span>
             </div>
         </form>
     )
 }
 
-export default LoginForm;
+export default SignUpForm;

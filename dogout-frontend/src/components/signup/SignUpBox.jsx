@@ -1,8 +1,7 @@
 import React from "react";
 import Logo from "../common/Logo";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./SignUpForm";
 
-import "./LoginBox.css";
 
 const LoginBox = () => {
 
@@ -15,7 +14,7 @@ const LoginBox = () => {
                 <div className="message">
                     {message}
                 </div>
-                <LoginForm setMessage={setMessage} />
+                <RegisterForm setMessage={setMessage} />
             </div>
         </div>
     )

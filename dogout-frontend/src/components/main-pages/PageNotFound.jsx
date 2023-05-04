@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../../css/PageNotFound.css"
-import BlueButton from '../BlueButton';
+import "./PageNotFound.css"
+import SignButton from '../common/SignButton';
 
 function PageNotFound() {
 
@@ -18,7 +18,7 @@ function PageNotFound() {
     return (
         <div className='not-found-container'>
             <h2>This page is not available.</h2>
-            <BlueButton onClick={returnToHomePage}>Return to the home page</BlueButton>
+            <SignButton onClick={returnToHomePage}>Return to the home page</SignButton>
         </div>
     )
 }
