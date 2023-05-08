@@ -1,9 +1,11 @@
 package pl.dogout.app.controller;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,25 +36,31 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public JwtTokenResponse authenticateUser(@RequestBody LoginRequest loginRequest) throws UsernameNotFoundException {
+    public ResponseEntity<JwtTokenResponse> authenticateUser(@RequestBody LoginRequest loginRequest) throws UsernameNotFoundException {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+        String token = "";
 
-        if (authentication.isAuthenticated())
-            return new JwtTokenResponse(jwtService.generateToken(loginRequest.email()));
-        else
-            throw new UsernameNotFoundException("User does not exist!");
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+            if (authentication.isAuthenticated())
+                token = jwtService.generateToken(loginRequest.email());
+
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.ok(new JwtTokenResponse(token));
+        }
+
+        return ResponseEntity.ok(new JwtTokenResponse(token));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> registerUser(@RequestBody UserAddRequest request) {
+    public ResponseEntity<?> registerUser(@RequestBody UserAddRequest request) {
 
         if (authService.userExists(request)) {
-            throw new RuntimeException("User with this email already exists!");
+            return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        User user = authService.addUser(request);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        authService.addUser(request);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/logout")

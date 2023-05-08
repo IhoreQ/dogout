@@ -21,12 +21,12 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User addUser(UserAddRequest request) {
+    public void addUser(UserAddRequest request) {
 
         User user = new User(request.email(), new UserDetails(request.firstName(), request.lastName()));
         user.setPassword(passwordEncoder.encode(request.password()));
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public boolean userExists(UserAddRequest request) {

@@ -3,16 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import BadgeIcon from '@mui/icons-material/Badge';
-import AuthenticateUser from '../../api/auth/AuthenticateUser';
 import SignButton from "../common/SignButton";
+import AuthenticationService from "../../api/service/AuthenticationService";
 
-const SignUpForm = ({setMessage}) => {
+import "./SignUpForm.css";
+
+const SignUpForm = () => {
 
     const navigate = useNavigate();
 
+    const [message, setMessage] = React.useState("");
     const [userInfo, setUserInfo] = React.useState({
-        name: "",
-        surname: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: ""
     });
@@ -36,11 +39,19 @@ const SignUpForm = ({setMessage}) => {
         return userInfo.password.length >= 6;
     }
 
+    const validateDetails = () => {
+        const pattern = /^(?=.{1,256}$)[A-ZĆŁŚŻŹa-ząćęńóśżź\\p{L}]+['-]?[A-ZĆŁŚŻŹa-ząćęńóśżź]+/;
+        return userInfo.firstName.match(pattern) && userInfo.lastName.match(pattern);
+    }
+
     const signUpClicked = async (event) => {
         event.preventDefault();
 
-        if (!validateEmail() & !validatePassword()) {
-            setMessage("Email and password are incorrect!");
+        if (!validateEmail() & !validatePassword() & !validateDetails()) {
+            setMessage("Whole data is wrong!");
+        }
+        else if (!validateDetails()) {
+            setMessage("Provided wrong name or last name!");
         }
         else if (!validateEmail()) {
             setMessage("Provided wrong email!");
@@ -49,34 +60,26 @@ const SignUpForm = ({setMessage}) => {
             setMessage("Provided wrong password!");
         }
         else {
-            // TODO proces rejestracji
-
-            const res = await AuthenticateUser(userInfo);
-            console.log(res.data);
-
-            if (res.status === 200) {
-                setUserInfo({
-                    email: "",
-                    password: ""
-                })
-                setMessage("");
-        
+            const response = await AuthenticationService.signup(userInfo);
+            
+            if (response.status === 201) {
                 navigate("/login");
             } else {
-                console.log("Error");
+                setMessage("User with this email already exist!");
             }
         }
     }
 
     return (
         <form className="signup-form">
-        <div className="input-div">
+            <div className="message sign-up-message">{message}</div>
+            <div className="input-div">
                 <BadgeIcon />
-                <input value={userInfo.name} onChange={changeInfo} name="name" type="text" placeholder="Name" />
+                <input value={userInfo.firstName} onChange={changeInfo} name="firstName" type="text" placeholder="First name" />
             </div>
             <div className="input-div">
                 <BadgeIcon />
-                <input value={userInfo.surname} onChange={changeInfo} name="surname" type="text" placeholder="Surname" />
+                <input value={userInfo.lastName} onChange={changeInfo} name="lastName" type="text" placeholder="Last name" />
             </div>
             <div className="input-div">
                 <PersonIcon />
@@ -88,7 +91,7 @@ const SignUpForm = ({setMessage}) => {
             </div>
             <SignButton onClick={signUpClicked} type="submit">Sign up</SignButton>
             <div className="sign-up-text">
-                Don't have an account? <span><Link to="/signup">Sign in</Link></span>
+                Don't have an account? <span><Link to="/login">Sign in</Link></span>
             </div>
         </form>
     )

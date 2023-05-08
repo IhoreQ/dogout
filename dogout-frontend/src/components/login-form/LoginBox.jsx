@@ -6,16 +6,11 @@ import "./LoginBox.css";
 
 const LoginBox = () => {
 
-    const [message, setMessage] = React.useState("");
-
     return (
         <div className="login-container">
             <div className="login-inner-container">
                 <Logo />
-                <div className="message">
-                    {message}
-                </div>
-                <LoginForm setMessage={setMessage} />
+                <LoginForm/>
             </div>
         </div>
     )

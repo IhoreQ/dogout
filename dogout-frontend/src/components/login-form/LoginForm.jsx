@@ -2,15 +2,16 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-import AuthenticateUser from '../../api/auth/AuthenticateUser';
+import AuthenticationService from '../../api/service/AuthenticationService';
 import SignButton from "../common/SignButton";
 
 import "./LoginForm.css";
 
-const LoginForm = ({setMessage}) => {
+const LoginForm = () => {
 
     const navigate = useNavigate();
 
+    const [message, setMessage] = React.useState("");
     const [userInfo, setUserInfo] = React.useState({
         email: "",
         password: ""
@@ -45,22 +46,24 @@ const LoginForm = ({setMessage}) => {
             setMessage("Provided wrong email!");
         } 
         else if (!validatePassword()) {
-            setMessage("Provided wrong password!");
+            setMessage("Password is too short!");
         }
         else {
-            // TODO proces logowania
-
-            const res = await AuthenticateUser(userInfo);
-            console.log(res.data);
+            const res = await AuthenticationService.authenticateUser(userInfo);
 
             if (res.status === 200) {
-                setUserInfo({
-                    email: "",
-                    password: ""
-                })
-                setMessage("");
-        
-                navigate("/home");
+                if (res.data.jwtToken.length === 0) {
+                    setMessage("Provided wrong email or password!");
+                    setUserInfo({
+                        email: userInfo.email,
+                        password: ""
+                    })
+                } else {
+                    const jwtToken = `Bearer ${res.data.jwtToken}`;
+                    AuthenticationService.setToken(jwtToken);
+                    AuthenticationService.setLoggedInUser(userInfo.email);
+                    navigate("/home");
+                }
             } else {
                 console.log("Error");
             }
@@ -69,6 +72,7 @@ const LoginForm = ({setMessage}) => {
 
     return (
         <form className="login-form">
+            <div className="message">{message}</div>
             <div className="input-div">
                 <PersonIcon />
                 <input value={userInfo.email} onChange={changeInfo} name="email" type="text" placeholder="Email" />

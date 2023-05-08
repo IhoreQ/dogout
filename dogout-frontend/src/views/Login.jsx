@@ -1,6 +1,6 @@
 import React from "react";
 import MainBox from "./MainBox";
-import LoginBox from "../login/LoginBox";
+import LoginBox from "../components/login-form/LoginBox";
 
 const Login = () => {
 
