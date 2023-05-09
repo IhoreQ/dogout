@@ -47,7 +47,7 @@ public class DogController {
 
         User user = userService.getUserByEmail(email);
         if (!user.hasDog())
-            return ResponseEntity.ok("User does not have a dog yet.");
+            return ResponseEntity.ok(false);
 
         Dog dog = dogService.getDogInfo(user);
         DogInfoResponse response = dogInfoMapper.getDogInfoResponse(dog);

@@ -24,9 +24,9 @@ const LoginForm = () => {
             return {
                 ...prevInfo,
                 [name]: value
-            }            
+            }
         });
-    } 
+    }
 
     const validateEmail = () => {
         return userInfo.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/);
@@ -44,7 +44,7 @@ const LoginForm = () => {
         }
         else if (!validateEmail()) {
             setMessage("Provided wrong email!");
-        } 
+        }
         else if (!validatePassword()) {
             setMessage("Password is too short!");
         }
@@ -59,7 +59,7 @@ const LoginForm = () => {
                         password: ""
                     })
                 } else {
-                    const jwtToken = `Bearer ${res.data.jwtToken}`;
+                    const jwtToken = res.data.jwtToken;
                     AuthenticationService.setToken(jwtToken);
                     AuthenticationService.setLoggedInUser(userInfo.email);
                     navigate("/home");

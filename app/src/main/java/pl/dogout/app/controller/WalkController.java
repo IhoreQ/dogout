@@ -66,7 +66,7 @@ public class WalkController {
         ActiveWalk activeWalk = walkService.getActiveWalkByUser(user);
 
         if (activeWalk == null)
-            return ResponseEntity.ok("User is not on a walk.");
+            return ResponseEntity.ok(false);
 
         UserActiveWalkResponse response = walkMapper.getUserActiveWalkResponse(activeWalk);
 

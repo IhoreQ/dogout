@@ -1,0 +1,38 @@
+.menu-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    background-color: #92420F;
+    border-radius: 50px 0 0 50px;
+    transition: 0.3s all;
+}
+
+.menu-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    margin-top: 5%;
+}
+
+.menu-logo-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5% 0 0;
+    height: 100%;
+}
+
+.menu-dog-logo {
+    filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
+    width: 90%;
+}
+
+.menu-burger {
+    display: none;
+    cursor: pointer;
+}

@@ -37,11 +37,10 @@ class AuthenticationService {
 
     logout = () => {
         localStorage.clear();
-        sessionStorage.clear();
     }
 
     setLoggedInUser = (email) => {
-        sessionStorage.setItem("email", email);
+        localStorage.setItem("email", email);
     }
 
     setToken = (jwtToken) => {
@@ -49,7 +48,7 @@ class AuthenticationService {
     }
 
     isUserLoggedIn = () => {
-        let user = sessionStorage.getItem("email");
+        let user = localStorage.getItem("email");
         if (user == null)
             return false;
         else
@@ -57,7 +56,7 @@ class AuthenticationService {
     }
 
     getUserEmail = () => {
-        let email = sessionStorage.getItem("email");
+        let email = localStorage.getItem("email");
         if (email == null)
             return "";
         else

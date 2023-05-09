@@ -4,6 +4,9 @@ import Navigator from "./views/Navigator";
 import Login from "./views/Login"
 import SignUp from "./views/SignUp";
 import Home from "./views/Home";
+import Places from "./views/Places";
+import MyDoggy from "./views/MyDoggy";
+import Settings from "./views/Settings";
 import GuestRoutes from "./components/route-settings/GuestRoutes";
 import UserRoutes from "./components/route-settings/UserRoutes";
 
@@ -27,9 +30,9 @@ function App() {
           {/* User paths */}
           <Route element={<UserRoutes />}>
             <Route path="/home" element={<Home />} />
-            <Route path="/places" element="places" />
-            <Route path="/my-doggy" element="my-doggy" />
-            <Route path="/settings" element="settings" />
+            <Route path="/places" element={<Places />} />
+            <Route path="/my-doggy" element={<MyDoggy />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/place/:id" element="place:id" />
           </Route>
         </Routes>

@@ -52,6 +52,10 @@ public class Place {
         this.city = city;
     }
 
+    public Long getIdPlace() {
+        return idPlace;
+    }
+
     public String getName() {
         return name;
     }

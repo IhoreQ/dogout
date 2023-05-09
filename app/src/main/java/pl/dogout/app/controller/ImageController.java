@@ -11,7 +11,6 @@ import pl.dogout.app.service.ImageService;
 import pl.dogout.app.util.ImageUtil;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/image")

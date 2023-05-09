@@ -1,5 +1,5 @@
 import React from "react";
-import MainBox from "./MainBox";
+import MainBox from "../components/common/MainBox";
 import LoginBox from "../components/login-form/LoginBox";
 
 const Login = () => {
