@@ -17,7 +17,6 @@ import pl.dogout.app.service.JwtService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin
 public class AuthController {
 
     private final AuthService authService;

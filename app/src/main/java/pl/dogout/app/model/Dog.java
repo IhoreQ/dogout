@@ -2,8 +2,6 @@ package pl.dogout.app.model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "dogs", schema = "public", catalog = "dogout")
 public class Dog {

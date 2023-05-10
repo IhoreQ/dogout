@@ -41,7 +41,8 @@ public class User {
     @JoinColumn(name = "id_user_details", referencedColumnName = "id_user_details", nullable = false)
     private UserDetails details;
 
-    public User() {}
+    public User() {
+    }
 
     public User(Long idUser) {
         this.idUser = idUser;

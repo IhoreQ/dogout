@@ -2,8 +2,6 @@ package pl.dogout.app.model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 
 @Entity
 @Table(name = "new_places_ideas", schema = "public", catalog = "dogout")
@@ -26,7 +24,8 @@ public class NewPlaceIdea {
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
     private User user;
 
-    public NewPlaceIdea() {}
+    public NewPlaceIdea() {
+    }
 
     public NewPlaceIdea(Long idNewPlaceIdea, String city, String name, String street, User user) {
         this.idNewPlaceIdea = idNewPlaceIdea;

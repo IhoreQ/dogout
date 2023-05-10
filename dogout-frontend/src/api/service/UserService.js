@@ -34,7 +34,7 @@ class UserService {
         const email = localStorage.getItem("email");
 
         return axios.get(
-            "http://localhost:8080/api/dog", {
+            "/api/dog", {
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Access-Control-Allow-Origin": '*',

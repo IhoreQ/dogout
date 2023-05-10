@@ -14,7 +14,6 @@ import pl.dogout.app.service.UserService;
 
 @RestController
 @RequestMapping("/api/dog")
-@CrossOrigin
 public class DogController {
 
     private final DogService dogService;

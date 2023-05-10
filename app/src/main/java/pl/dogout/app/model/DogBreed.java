@@ -3,8 +3,6 @@ package pl.dogout.app.model;
 import jakarta.persistence.*;
 
 import java.util.Collection;
-import java.util.Objects;
-
 
 @Entity
 @Table(name = "dogs_breed", schema = "public", catalog = "dogout")
@@ -23,7 +21,8 @@ public class DogBreed {
     @JoinColumn(name = "id_dog_size", referencedColumnName = "id_dog_size")
     private DogSize size;
 
-    public DogBreed() {}
+    public DogBreed() {
+    }
 
     public DogBreed(Long idDogBreed, String name, Collection<Dog> dogsByBreed, DogSize size) {
         this.idDogBreed = idDogBreed;

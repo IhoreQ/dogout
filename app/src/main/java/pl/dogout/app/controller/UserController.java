@@ -10,7 +10,6 @@ import pl.dogout.app.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin
 public class UserController {
 
     private final UserService userService;

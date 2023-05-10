@@ -17,7 +17,8 @@ public class DogSize {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "size")
     private Collection<DogBreed> breedsBySize;
 
-    public DogSize() {}
+    public DogSize() {
+    }
 
     public DogSize(Long idDogSize, String name, Collection<DogBreed> breedsBySize) {
         this.idDogSize = idDogSize;

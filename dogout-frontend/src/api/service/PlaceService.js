@@ -7,10 +7,11 @@ class PlaceService {
         const token = localStorage.getItem("token");
 
         return axios.get(
-            "http://localhost:8080/api/place/all", {
+            "/api/place/all", {
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Access-Control-Allow-Origin": '*',
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },

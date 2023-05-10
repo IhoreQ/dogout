@@ -35,7 +35,8 @@ public class Address {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
     private Collection<Place> places;
 
-    public Address() {}
+    public Address() {
+    }
 
     public Address(Long idAddress, String postalCode, String street, String homeNumber, String country, City city, Collection<Place> places) {
         this.idAddress = idAddress;
