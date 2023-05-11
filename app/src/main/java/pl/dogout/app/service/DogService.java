@@ -31,10 +31,6 @@ public class DogService {
         return dog.orElse(null);
     }
 
-    public List<Dog> getDogsFromPlace(Long id) {
-        return null;
-    }
-
     public boolean deleteDog(User user) {
 
         if (!user.hasDog())

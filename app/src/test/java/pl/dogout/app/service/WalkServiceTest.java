@@ -27,6 +27,18 @@ public class WalkServiceTest {
         System.out.println("endTime: " + endTime);
 
     }
+
+    @Test
+    void getLeftTimeTest() {
+        LocalTime now = LocalTime.now();
+        String durationString = "01:00:00";
+        LocalTime duration = LocalTime.parse(durationString);
+        String startedAtDuration = "13:45:12";
+        LocalTime startedAt = LocalTime.parse(startedAtDuration);
+
+        LocalTime difference = now.minusSeconds(startedAt.getSecond()).minusMinutes(startedAt.getMinute()).minusHours(startedAt.getHour());
+        LocalTime result = duration.minusSeconds(difference.getSecond()).minusMinutes(difference.getMinute()).minusHours(difference.getHour());
+    }
 }
 
 

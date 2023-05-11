@@ -67,7 +67,9 @@ public class WalkController {
         if (activeWalk == null)
             return ResponseEntity.ok(false);
 
-        UserActiveWalkResponse response = walkMapper.getUserActiveWalkResponse(activeWalk);
+        LocalTime timeLeft = walkService.getLeftTime(activeWalk);
+
+        UserActiveWalkResponse response = walkMapper.getUserActiveWalkResponse(activeWalk, timeLeft);
 
         return ResponseEntity.ok(response);
     }

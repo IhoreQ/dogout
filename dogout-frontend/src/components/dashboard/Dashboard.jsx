@@ -11,7 +11,7 @@ const Dashboard = ({ activeElement }) => {
             <div className="menu-logo">
                 <SeparateBar styles={{ visibility: "hidden" }} />
                 <div className="menu-logo-inner">
-                    <img src={require("../../img/dog-logo.png")} alt="" className="menu-dog-logo" />
+                    <img src={"/img/dog-logo.png"} alt="" className="menu-dog-logo" />
                 </div>
                 <SeparateBar />
                 <div className="menu-burger">

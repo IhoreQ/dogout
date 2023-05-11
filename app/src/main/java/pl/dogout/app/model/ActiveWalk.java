@@ -63,4 +63,6 @@ public class ActiveWalk {
     public User getUser() {
         return user;
     }
+
+
 }

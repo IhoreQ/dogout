@@ -5,6 +5,11 @@ import Dashboard from "../components/dashboard/Dashboard";
 import ContentContainer from "../components/common/ContentContainer";
 import UserService from "../api/service/UserService";
 import { useEffect, useState } from "react";
+import AuthenticationService from "../api/service/AuthenticationService";
+import Loading from "../components/common/Loading";
+
+import "./Home.css";
+import WalkBox from "../components/walk-box/WalkBox";
 
 const Home = () => {
 
@@ -13,14 +18,16 @@ const Home = () => {
     }, []);
 
     const [activeWalk, setActiveWalk] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchActiveWalk = async () => {
             try {
                 const { data: response } = await UserService.getActiveWalk();
                 setActiveWalk(response);
+                setLoading(false);
             } catch (error) {
-                console.error(error) 
+                AuthenticationService.logout();
             }
         };
 
@@ -32,7 +39,16 @@ const Home = () => {
             <AppWrapper>
                 <Dashboard activeElement="home" />
                 <ContentContainer>
-                    {activeWalk === false ? "No active walk!" : activeWalk.placeName}
+                    {loading && <Loading />}
+                    {!loading &&
+                        <div className="home-container">
+                            <div className="home-content">
+                                <div className="active-walk-header">
+                                    {activeWalk === false ? <h1>No active walk</h1> : <h1>Active walk:</h1>}
+                                </div>
+                                    {activeWalk !== false && <WalkBox name={activeWalk.placeName} photo={activeWalk.photo} time={activeWalk.timeLeft}/>}
+                            </div>
+                        </div>}
                 </ContentContainer>
             </AppWrapper>
         </MainBox>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import AuthenticationService from "./AuthenticationService";
 
 class PlaceService {
 
@@ -18,13 +19,14 @@ class PlaceService {
         }).then(res => {
             if (res != null)
                 return res;
-        })
-            .catch(err => {
-                let error = "";
-                if (err.response)
-                    error += err.response;
-                return error;
-            });
+        }).catch(err => {
+            // TODO  Zamiast tego wyświetlić komunikat, że sesja wygasła, gdy wystąpi błąd 403 i po kliknięciu wylogować
+            AuthenticationService.logout();
+            let error = "";
+            if (err.response)
+                error += err.response;
+            return error;
+        });
     }
 }
 

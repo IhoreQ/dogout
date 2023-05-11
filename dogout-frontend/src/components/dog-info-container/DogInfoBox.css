@@ -1,0 +1,39 @@
+.dog-info-box {
+    width: 75%;
+    height: 25%;
+    background: #92420F;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.upper-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    background-color: #92420F;
+    border-radius: 25px 25px 0 0;
+    text-align: center;
+    font-size: 1.7rem;
+    text-shadow: var(--main-text-shadow);
+}
+
+.lower-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    background-color: #F5C9A1;
+    border-radius: 0 0 25px 25px;
+    text-shadow: var(--main-text-shadow);
+    text-align: center;
+}
+
+.lower-box p,
+.description-lower-box p {
+    color: #92420F;
+    font-size: 1.5rem;
+}

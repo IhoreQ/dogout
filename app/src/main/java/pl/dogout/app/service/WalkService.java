@@ -66,6 +66,16 @@ public class WalkService {
         return now.isAfter(endTime) || now.isBefore(startedAt);
     }
 
+    public LocalTime getLeftTime(ActiveWalk activeWalk) {
+        LocalTime now = LocalTime.now();
+        LocalTime startedAt = activeWalk.getStartedAt();
+        LocalTime duration = LocalTime.parse(activeWalk.getTimeOfWalk());
+
+        LocalTime difference = now.minusSeconds(startedAt.getSecond()).minusMinutes(startedAt.getMinute()).minusHours(startedAt.getHour());
+
+        return duration.minusSeconds(difference.getSecond()).minusMinutes(difference.getMinute()).minusHours(difference.getHour());
+    }
+
     public void saveWalk(ActiveWalk activeWalk) {
         walkRepository.save(activeWalk);
     }

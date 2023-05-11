@@ -1,4 +1,5 @@
 import axios from "axios";
+import AuthenticationService from "./AuthenticationService";
 
 class UserService {
 
@@ -7,7 +8,7 @@ class UserService {
         const email = localStorage.getItem("email");
 
         return axios.get(
-            "http://localhost:8080/api/walk", {
+            "/api/walk", {
             headers: {
                 "Authorization": `Bearer ${token}`,
                 "Access-Control-Allow-Origin": '*',
@@ -22,6 +23,7 @@ class UserService {
                 return res;
         })
             .catch(err => {
+                AuthenticationService.logout();
                 let error = "";
                 if (err.response)
                     error += err.response;
@@ -47,13 +49,67 @@ class UserService {
         }).then(res => {
             if (res != null)
                 return res;
-        })
-            .catch(err => {
-                let error = "";
-                if (err.response)
-                    error += err.response;
-                return error;
-            });
+        }).catch(err => {
+            AuthenticationService.logout();
+            let error = "";
+            if (err.response)
+                error += err.response;
+            return error;
+        });
+    }
+
+    finishWalk = async () => {
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
+
+        return axios.delete(
+            "/api/walk", {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Access-Control-Allow-Origin": '*',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            params: {
+                "email": email
+            }
+        }).then(res => {
+            if (res != null)
+                return res;
+        }).catch(err => {
+            AuthenticationService.logout();
+            let error = "";
+            if (err.response)
+                error += err.response;
+            return error;
+        });
+    }
+
+    deleteDoggy = async () => {
+        const token = localStorage.getItem("token");
+        const email = localStorage.getItem("email");
+
+        return axios.delete(
+            "/api/dog", {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Access-Control-Allow-Origin": '*',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            params: {
+                "email": email
+            }
+        }).then(res => {
+            if (res != null)
+                return res;
+        }).catch(err => {
+            AuthenticationService.logout();
+            let error = "";
+            if (err.response)
+                error += err.response;
+            return error;
+        });
     }
 }
 

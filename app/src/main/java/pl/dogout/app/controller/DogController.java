@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import pl.dogout.app.dto.mapper.DogMapper;
 import pl.dogout.app.dto.request.DogAddRequest;
 import pl.dogout.app.dto.response.DogInfoResponse;
+import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.User;
 import pl.dogout.app.service.DogService;
 import pl.dogout.app.service.UserService;
+import pl.dogout.app.service.WalkService;
 
 @RestController
 @RequestMapping("/api/dog")
@@ -19,11 +21,13 @@ public class DogController {
     private final DogService dogService;
     private final UserService userService;
     private final DogMapper dogInfoMapper;
+    private final WalkService walkService;
 
     @Autowired
-    public DogController(DogService dogService, UserService userService) {
+    public DogController(DogService dogService, UserService userService, WalkService walkService) {
         this.dogService = dogService;
         this.userService = userService;
+        this.walkService = walkService;
         this.dogInfoMapper = new DogMapper();
     }
 
@@ -55,11 +59,15 @@ public class DogController {
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deleteDog(@RequestParam String email) {
+    public ResponseEntity<Boolean> deleteDog(@RequestParam String email) {
         User user = userService.getUserByEmail(email);
-        boolean isDeleted = dogService.deleteDog(user);
+        ActiveWalk activeWalk = walkService.getActiveWalkByUser(user);
+        boolean isDeleted = false;
 
-        return isDeleted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (activeWalk == null)
+            isDeleted = dogService.deleteDog(user);
+
+        return isDeleted ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
     }
 
 }

@@ -4,7 +4,7 @@ class AuthenticationService {
 
     authenticateUser = async (userInfo) => {
         return axios.post(
-            "http://localhost:8080/api/auth/authenticate",
+            "/api/auth/authenticate",
             userInfo
         ).then((res) => {  
             if (res != null) {
@@ -21,7 +21,7 @@ class AuthenticationService {
     
     signup = async (userInfo) => {
         return axios.post(
-            "http://localhost:8080/api/auth/signup",
+            "/api/auth/signup",
             userInfo
         ).then(res => {
             if (res != null)
