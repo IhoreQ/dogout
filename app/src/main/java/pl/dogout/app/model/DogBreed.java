@@ -11,8 +11,8 @@ public class DogBreed {
     @Id
     @Column(name = "id_dog_breed")
     private Long idDogBreed;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "breed")

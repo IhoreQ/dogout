@@ -12,20 +12,16 @@ public class Address {
     @Column(name = "id_address")
     private Long idAddress;
 
-    @Basic
     @Column(name = "postal_code")
     private String postalCode;
 
-    @Basic
-    @Column(name = "street")
+    @Column
     private String street;
 
-    @Basic
     @Column(name = "home_number")
     private String homeNumber;
 
-    @Basic
-    @Column(name = "country")
+    @Column
     private String country;
 
     @ManyToOne

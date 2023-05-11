@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import DogInfoBox from "./DogInfoBox";
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -7,10 +7,13 @@ import UserService from "../../api/service/UserService";
 
 const DogInfoContainer = ({ doggy }) => {
 
-    const handleDeleteClick = () => {
-        UserService.deleteDoggy();
-        window.location.reload(false);
-    }
+    const deleteDogRequest = useCallback(async () => {
+        const res = await UserService.deleteDoggy();
+        const isDeleted = res.data;
+
+        // TODO POPUP
+        return !isDeleted ? console.log("Active walk") : window.location.reload(false);
+    })
 
     return (
         <div className="my-doggy-content">
@@ -41,7 +44,7 @@ const DogInfoContainer = ({ doggy }) => {
                     </div>
                 </div>
             </div>
-            <div onClick={handleDeleteClick} className="doggy-footer-container">
+            <div onClick={deleteDogRequest} className="doggy-footer-container">
                 <div className="doggy-footer-remove-box">
                     <DeleteIcon />
                 </div>

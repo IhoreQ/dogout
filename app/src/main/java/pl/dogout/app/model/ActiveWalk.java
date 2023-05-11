@@ -12,10 +12,9 @@ public class ActiveWalk {
     @Column(name = "id_active_walk")
     private Long idActiveWalk;
 
-    @Basic
     @Column(name = "time_of_walk", nullable = false)
     private String timeOfWalk;
-    @Basic
+
     @Column(name = "started_at", nullable = false)
     private LocalTime startedAt;
 

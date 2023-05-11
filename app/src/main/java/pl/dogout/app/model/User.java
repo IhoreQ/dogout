@@ -14,17 +14,16 @@ public class User {
     @Id
     @Column(name = "id_user")
     private Long idUser;
-    @Basic
-    @Column(name = "email")
+
+    @Column
     private String email;
-    @Basic
-    @Column(name = "password")
+
+    @Column
     private String password;
-    @Basic
+
     @Column(name = "created_at")
     private Date createdAt;
 
-    @Basic
     @Column(name = "has_dog")
     private boolean hasDog;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

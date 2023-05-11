@@ -86,7 +86,6 @@ public class WalkController {
     public ResponseEntity<String> finishWalk(@RequestParam String email) throws Exception {
 
         User user = userService.getUserByEmail(email);
-
         Collection<ActiveWalk> activeWalks = user.getActiveWalks();
 
         if (activeWalks.isEmpty()) {

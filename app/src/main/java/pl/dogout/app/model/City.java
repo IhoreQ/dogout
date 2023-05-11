@@ -10,8 +10,8 @@ public class City {
     @Id
     @Column(name = "id_city")
     private Long idCity;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
     private Collection<Address> addresses;

@@ -9,21 +9,20 @@ public class Dog {
     @Id
     @Column(name = "id_dog")
     private Long idDog;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
-    @Basic
-    @Column(name = "age")
+
+    @Column
     private int age;
 
-    @Basic
-    @Column(name = "gender")
+    @Column
     private boolean gender;
-    @Basic
-    @Column(name = "description")
+
+    @Column
     private String description;
-    @Basic
-    @Column(name = "photo")
+
+    @Column
     private String photo;
 
     @ManyToOne

@@ -10,14 +10,14 @@ public class NewPlaceIdea {
     @Id
     @Column(name = "id_new_place_idea")
     private Long idNewPlaceIdea;
-    @Basic
-    @Column(name = "city")
+
+    @Column
     private String city;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
-    @Basic
-    @Column(name = "street")
+
+    @Column
     private String street;
 
     @ManyToOne

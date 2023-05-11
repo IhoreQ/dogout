@@ -11,8 +11,8 @@ public class Role {
     @Id
     @Column(name = "id_role")
     private Long idRole;
-    @Basic
-    @Column(name = "role")
+
+    @Column
     private String role;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     private Collection<User> usersByRole;

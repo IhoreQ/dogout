@@ -11,12 +11,11 @@ public class Place {
     @Id
     @Column(name = "id_place")
     private Long idPlace;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
 
-    @Basic
-    @Column(name = "photo")
+    @Column
     private String photo;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "place")

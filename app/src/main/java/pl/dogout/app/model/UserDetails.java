@@ -11,11 +11,11 @@ public class UserDetails {
     @Id
     @Column(name = "id_user_details")
     private Long idUserDetails;
-    @Basic
-    @Column(name = "name")
+
+    @Column
     private String name;
-    @Basic
-    @Column(name = "surname")
+
+    @Column
     private String surname;
 
     @OneToOne(mappedBy = "details")
