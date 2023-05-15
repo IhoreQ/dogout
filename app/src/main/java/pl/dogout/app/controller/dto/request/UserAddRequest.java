@@ -1,4 +1,4 @@
-package pl.dogout.app.dto.request;
+package pl.dogout.app.controller.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

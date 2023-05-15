@@ -1,18 +1,23 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import DogInfoBox from "./DogInfoBox";
 import DeleteIcon from '@mui/icons-material/Delete';
+import UserService from "../../api/service/UserService";
+import Warning from "../warning/Warning";
+import AppCover from "../common/AppCover";
+import { WarningContext } from "../../App";
 
 import "./DogInfoContainer.css";
-import UserService from "../../api/service/UserService";
 
 const DogInfoContainer = ({ doggy }) => {
+
+    const { setWarning, setWarningId } = useContext(WarningContext);
 
     const deleteDogRequest = useCallback(async () => {
         const res = await UserService.deleteDoggy();
         const isDeleted = res.data;
 
-        // TODO POPUP
-        return !isDeleted ? console.log("Active walk") : window.location.reload(false);
+        setWarningId("DOG_DELETE");
+        return !isDeleted ? setWarning(true) : window.location.reload(false);
     })
 
     return (
@@ -44,8 +49,8 @@ const DogInfoContainer = ({ doggy }) => {
                     </div>
                 </div>
             </div>
-            <div onClick={deleteDogRequest} className="doggy-footer-container">
-                <div className="doggy-footer-remove-box">
+            <div className="doggy-footer-container">
+                <div onClick={deleteDogRequest} className="doggy-footer-remove-box">
                     <DeleteIcon />
                 </div>
             </div>

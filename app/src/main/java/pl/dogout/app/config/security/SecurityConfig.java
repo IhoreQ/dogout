@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,18 +42,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/auth/authenticate", "/api/auth/signup", "/api/image/**").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/api/**")
-                .authenticated().and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                .and()
+        return http
+                .authorizeHttpRequests(
+                        request -> request
+                                .requestMatchers("/api/auth/authenticate", "/api/auth/signup", "/api/image/**")
+                                .permitAll()
+                )
+                .authorizeHttpRequests(
+                        request -> request.requestMatchers("/api/**")
+                                .authenticated()
+                )
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(
+                        handler -> handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -83,8 +89,7 @@ public class SecurityConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-        List<String> allowedOrigins = new ArrayList<>();
-        allowedOrigins.add("http://localhost:3000");
+        List<String> allowedOrigins = List.of("http://localhost:3000");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);

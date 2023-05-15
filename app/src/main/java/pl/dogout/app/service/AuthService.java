@@ -3,7 +3,7 @@ package pl.dogout.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.dogout.app.dto.request.UserAddRequest;
+import pl.dogout.app.controller.dto.request.UserAddRequest;
 import pl.dogout.app.model.User;
 import pl.dogout.app.model.UserDetails;
 import pl.dogout.app.repository.UserRepository;

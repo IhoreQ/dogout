@@ -24,11 +24,20 @@ public class DogBreed {
     public DogBreed() {
     }
 
+    public DogBreed(Long idDogBreed, String name) {
+        this.idDogBreed = idDogBreed;
+        this.name = name;
+    }
+
     public DogBreed(Long idDogBreed, String name, Collection<Dog> dogsByBreed, DogSize size) {
         this.idDogBreed = idDogBreed;
         this.name = name;
         this.dogsByBreed = dogsByBreed;
         this.size = size;
+    }
+
+    public Long getIdDogBreed() {
+        return idDogBreed;
     }
 
     public String getName() {

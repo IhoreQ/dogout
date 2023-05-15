@@ -70,7 +70,7 @@ const SignUpForm = () => {
         }
     }
 
-    return (
+    return ( 
         <form className="signup-form">
             <div className="message sign-up-message">{message}</div>
             <div className="input-div">

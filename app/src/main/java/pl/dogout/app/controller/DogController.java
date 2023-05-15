@@ -4,15 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dogout.app.dto.mapper.DogMapper;
-import pl.dogout.app.dto.request.DogAddRequest;
-import pl.dogout.app.dto.response.DogInfoResponse;
+import pl.dogout.app.controller.dto.request.DogAddRequest;
+import pl.dogout.app.controller.dto.response.DogBreedResponse;
+import pl.dogout.app.controller.dto.response.DogInfoResponse;
 import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
+import pl.dogout.app.model.DogBreed;
 import pl.dogout.app.model.User;
 import pl.dogout.app.service.DogService;
 import pl.dogout.app.service.UserService;
 import pl.dogout.app.service.WalkService;
+
+import java.util.Comparator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/dog")
@@ -20,7 +24,6 @@ public class DogController {
 
     private final DogService dogService;
     private final UserService userService;
-    private final DogMapper dogInfoMapper;
     private final WalkService walkService;
 
     @Autowired
@@ -28,7 +31,6 @@ public class DogController {
         this.dogService = dogService;
         this.userService = userService;
         this.walkService = walkService;
-        this.dogInfoMapper = new DogMapper();
     }
 
     @PostMapping
@@ -53,7 +55,7 @@ public class DogController {
             return ResponseEntity.ok(false);
 
         Dog dog = dogService.getDogInfo(user);
-        DogInfoResponse response = dogInfoMapper.getDogInfoResponse(dog);
+        DogInfoResponse response = DogInfoResponse.getResponse(dog);
 
         return ResponseEntity.ok(response);
     }
@@ -68,6 +70,15 @@ public class DogController {
             isDeleted = dogService.deleteDog(user);
 
         return isDeleted ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
+    }
+
+    @GetMapping("/breeds")
+    public List<DogBreedResponse> getAllBreeds() {
+        List<DogBreed> breeds = dogService.getAllBreeds();
+        return breeds.stream()
+                .sorted(Comparator.comparing(DogBreed::getName))
+                .map(DogBreedResponse::getResponse)
+                .toList();
     }
 
 }

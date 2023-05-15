@@ -1,3 +1,4 @@
+import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PageNotFound from "./views/PageNotFound";
 import Navigator from "./views/Navigator";
@@ -12,30 +13,39 @@ import UserRoutes from "./components/route-settings/UserRoutes";
 
 import "./App.css"
 
+export const WarningContext = createContext(null);
+
 function App() {
+
+  const [warning, setWarning] = useState(false);
+  const [warningId, setWarningId] = useState(1);
+
   return (
     <Router>
       <div className="App">
-        <Routes>
-          {/* Wrong paths */}
-          <Route path="*" element={<PageNotFound />} />
+        <WarningContext.Provider value={{ warning: warning, setWarning: setWarning, warningId: warningId, setWarningId: setWarningId }}>
+          <Routes>
+            {/* Wrong paths */}
+            <Route path="*" element={<PageNotFound />} />
 
-          {/* Guest paths */}
-          <Route element={<GuestRoutes />}>
-            <Route path="/" element={<Navigator />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
+            {/* Guest paths */}
+            <Route element={<GuestRoutes />}>
+              <Route path="/" element={<Navigator />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
 
-          {/* User paths */}
-          <Route element={<UserRoutes />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/places" element={<Places />} />
-            <Route path="/my-doggy" element={<MyDoggy />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/place/:id" element="place:id" />
-          </Route>
-        </Routes>
+            {/* User paths */}
+
+            <Route element={<UserRoutes />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/places" element={<Places />} />
+              <Route path="/my-doggy" element={<MyDoggy />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/place/:id" element="place:id" />
+            </Route>
+          </Routes>
+        </WarningContext.Provider>
       </div>
     </Router>
   );

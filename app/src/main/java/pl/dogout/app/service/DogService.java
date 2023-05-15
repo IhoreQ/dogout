@@ -2,7 +2,7 @@ package pl.dogout.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.dogout.app.dto.request.DogAddRequest;
+import pl.dogout.app.controller.dto.request.DogAddRequest;
 import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.DogBreed;
 import pl.dogout.app.model.User;
@@ -52,7 +52,7 @@ public class DogService {
 
     public boolean addDog(User user, DogAddRequest dogAddRequest) {
 
-        Optional<DogBreed> foundBreed = dogBreedRepository.findByName(dogAddRequest.breed());
+        Optional<DogBreed> foundBreed = dogBreedRepository.findById(dogAddRequest.breedId());
 
         if (foundBreed.isPresent()) {
             DogBreed breed = foundBreed.get();
@@ -65,6 +65,10 @@ public class DogService {
         }
 
         return false;
+    }
+
+    public List<DogBreed> getAllBreeds() {
+        return dogBreedRepository.findAllNamesWithIds();
     }
 
 }

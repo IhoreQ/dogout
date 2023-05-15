@@ -3,11 +3,9 @@ package pl.dogout.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dogout.app.dto.mapper.DogMapper;
-import pl.dogout.app.dto.mapper.WalkMapper;
-import pl.dogout.app.dto.request.WalkStartRequest;
-import pl.dogout.app.dto.response.DogInfoResponse;
-import pl.dogout.app.dto.response.UserActiveWalkResponse;
+import pl.dogout.app.controller.dto.request.WalkStartRequest;
+import pl.dogout.app.controller.dto.response.DogInfoResponse;
+import pl.dogout.app.controller.dto.response.UserActiveWalkResponse;
 import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.Place;
@@ -28,15 +26,11 @@ public class WalkController {
 
     private final WalkService walkService;
 
-    private final WalkMapper walkMapper;
-    private final DogMapper dogMapper;
 
     @Autowired
     public WalkController(UserService userService, WalkService walkService) {
         this.userService = userService;
         this.walkService = walkService;
-        this.walkMapper = new WalkMapper();
-        this.dogMapper = new DogMapper();
     }
 
     @PostMapping
@@ -69,7 +63,7 @@ public class WalkController {
 
         LocalTime timeLeft = walkService.getLeftTime(activeWalk);
 
-        UserActiveWalkResponse response = walkMapper.getUserActiveWalkResponse(activeWalk, timeLeft);
+        UserActiveWalkResponse response = UserActiveWalkResponse.getResponse(activeWalk, timeLeft);
 
         return ResponseEntity.ok(response);
     }
@@ -78,7 +72,7 @@ public class WalkController {
     public List<DogInfoResponse> getAllDogsFromPlace(@PathVariable Long placeId) {
         List<Dog> dogs = walkService.getDogsFromPlace(placeId);
         return dogs.stream()
-                .map(dogMapper::getDogInfoResponse)
+                .map(DogInfoResponse::getResponse)
                 .toList();
     }
 
