@@ -9,6 +9,7 @@ import pl.dogout.app.util.ImageUtil;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ImageService {
@@ -21,12 +22,18 @@ public class ImageService {
     }
 
     public String uploadImage(MultipartFile file) throws IOException {
+
+        int nameLength = 10;
+        String filename = UUID.randomUUID()
+                        .toString()
+                        .substring(0, nameLength);
+
         imageRepository.save(Image.builder()
-                .name(file.getOriginalFilename())
+                .name(filename)
                 .type(file.getContentType())
                 .image(ImageUtil.compressImage(file.getBytes())).build());
 
-        return "File " + file.getOriginalFilename() + " uploaded successfully!";
+        return filename;
     }
 
     public Image downloadImage(String fileName) {

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PetsIcon from '@mui/icons-material/Pets';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
-import "./NewDogForm.css";
 import SignButton from "../common/SignButton";
 import CustomSelect from "../common/CustomSelect";
 import DogService from "../../api/service/DogService";
+import { WarningContext } from "../../App";
+
+import "./NewDogForm.css";
 
 const NewDogForm = () => {
 
@@ -13,31 +14,15 @@ const NewDogForm = () => {
     const [photoMessage, setPhotoMessage] = useState("Upload dog photo");
     const [uploadedImage, setUploadedImage] = useState(null);
     const [loading, setLoading] = useState(true);
+    const { setWarning, setWarningId } = useContext(WarningContext);
     const [dogInfo, setDogInfo] = useState({
         name: '',
         age: '',
         breedId: 0,
         gender: true,
         description: '',
-        photo: uploadedImage
+        photo: ''
     })
-
-    const changeInfo = (event) => {
-        const { name, value } = event.target;
-
-        setDogInfo(prevInfo => {
-            return {
-                ...prevInfo,
-                [name]: value
-            }            
-        });
-    }
-
-    const handlePhotoUpload = (e) => {
-        e.preventDefault();
-        setUploadedImage(e.target.files[0]);
-        setPhotoMessage(e.target.files[0].name);
-    }
 
     useEffect(() => {
         const fetchBreeds = async () => {
@@ -48,7 +33,7 @@ const NewDogForm = () => {
                     return {
                         ...prevInfo,
                         breedId: response[0].id
-                    }            
+                    }
                 });
                 setLoading(false);
             } catch (error) {
@@ -59,37 +44,90 @@ const NewDogForm = () => {
         fetchBreeds();
     }, []);
 
+    const triggerWarning = (id) => {
+        setWarningId(id);
+        setWarning(true);
+    }
+
+    const changeInfo = (event) => {
+        const { name, value } = event.target;
+
+        setDogInfo(prevInfo => {
+            return {
+                ...prevInfo,
+                [name]: value
+            }
+        });
+    }
+
+    const checkIfInputsAreEmpty = () => {
+        return dogInfo.name.length == 0 ||
+            dogInfo.description.length == 0 ||
+            uploadedImage == null
+    }
+
+    const handlePhotoUpload = (e) => {
+        e.preventDefault();
+        if (e.target.files.length !== 0) {
+            setUploadedImage(e.target.files[0]);
+            setPhotoMessage(e.target.files[0].name);
+        }
+    }
+
+    const castDogProperties = () => {
+        const age = parseInt(dogInfo.age, 10);
+        if (isNaN(age)) {
+            triggerWarning("WRONG_AGE")
+            return;
+        }
+        dogInfo.gender = dogInfo.gender === "true";
+        dogInfo.age = age;
+        dogInfo.breedId = parseInt(dogInfo.breedId, 10);
+    }
+
     const validateFileSize = () => {
         const MAX_FILE_SIZE = 10240;
-
-        if (uploadedImage == null)
-            return false;
-
-        console.log(uploadedImage);
-        
         return uploadedImage.size / 1024 <= MAX_FILE_SIZE;
     }
 
     const validateName = () => {
         const pattern = /^(?=.{1,256}$)[A-ZĆŁŚŻŹa-ząćęńóśżź\\p{L}]+['-]?[A-ZĆŁŚŻŹa-ząćęńóśżź]+/;
-        return dogInfo.name.match(pattern);
+        const matchOutput = dogInfo.name.match(pattern);
+        return matchOutput != null && matchOutput[0].length == dogInfo.name.length;
+    }
+
+    const validateAge = () => {
+        return dogInfo.age >= 0 && dogInfo.age <= 30;
     }
 
     const handleAddDogClick = (event) => {
         event.preventDefault();
-        
-        // if (!validateFileSize()) {
-            
-        // } 
-        // else if (!validateName()) {
 
-        // }
-        // else {
+        if (checkIfInputsAreEmpty()) {
+            setWarningId("EMPTY_INPUTS");
+            setWarning(true);
+            return;
+        }
 
-        // }
+        castDogProperties();
+
+        if (!validateFileSize()) {
+            triggerWarning("WRONG_FILE_SIZE");
+        }
+        else if (!validateName()) {
+            triggerWarning("INVALID_NAME");
+        }
+        else if (!validateAge()) {
+            triggerWarning("AGE_RANGE");
+        }
+        else {
+
+        }
+        console.log(dogInfo);
+
     }
 
-    return (    
+    return (
         <div className="new-dog-add-page" id="my-doggy-form">
             <div className="new-dog-paw">
                 <PetsIcon />
@@ -105,8 +143,8 @@ const NewDogForm = () => {
                     <option value={true}>Male</option>
                     <option value={false}>Female</option>
                 </CustomSelect>
-                <textarea name="new-dog-description" className="new-dog-textarea" cols="30" rows="10" placeholder="Description" required></textarea>
-                <input onChange={handlePhotoUpload} id="file-upload" accept="image/*" type="file" name="file" hidden required />
+                <textarea onChange={changeInfo} name="description" value={dogInfo.description} className="new-dog-textarea" cols="30" rows="10" placeholder="Description"></textarea>
+                <input onChange={handlePhotoUpload} id="file-upload" accept="image/*" type="file" name="file" hidden />
                 <label htmlFor="file-upload" className="dog-photo-upload">
                     <CloudUploadIcon />
                     <span id="file-chosen">{photoMessage}</span>

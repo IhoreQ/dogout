@@ -24,13 +24,17 @@ public class ImageController {
     }
 
     @PostMapping
-    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
-        String response = imageService.uploadImage(file);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+        try {
+            String response = imageService.uploadImage(file);
+            return ResponseEntity.ok(response);
+        } catch (IOException e) {
+            return ResponseEntity.ok(false);
+        }
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<byte[]> downloadImage(@PathVariable("name") String name) throws IOException {
+    public ResponseEntity<byte[]> downloadImage(@PathVariable("name") String name) {
         Image image = imageService.downloadImage(name);
 
         return image == null ?

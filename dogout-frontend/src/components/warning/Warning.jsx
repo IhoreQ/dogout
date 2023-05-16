@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import AppCover from "../common/AppCover";
-import CloseIcon from '@mui/icons-material/Close';
 import { WarningContext } from "../../App";
 
 import "./Warning.css";
@@ -16,7 +15,12 @@ const Warning = () => {
 
     const warnings = new Map([
         ["DEFAULT", "Something went wrong!"],
-        ["DOG_DELETE", "You cannot delete your dog while you're on a walk!"]
+        ["DOG_DELETE", "You cannot delete your dog while you're on a walk!"],
+        ["EMPTY_INPUTS", "You have to fill in all inputs!"],
+        ["WRONG_AGE", "You provided age in wrong format!"],
+        ["WRONG_FILE_SIZE", "The file is too big!"],
+        ["INVALID_NAME", "Provided name is invalid!"],
+        ["AGE_RANGE", "Age must be between 0 and 30!"]
     ]);
 
     return (
