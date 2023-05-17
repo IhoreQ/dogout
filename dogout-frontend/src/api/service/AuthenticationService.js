@@ -59,7 +59,7 @@ const getUserEmail = () => {
         return email;
 }
 
-export default {
+const exportedFunctions = {
     authenticateUser,
     signup,
     logout,
@@ -67,4 +67,6 @@ export default {
     setToken,
     isUserLoggedIn,
     getUserEmail
-};
+}
+
+export default exportedFunctions;

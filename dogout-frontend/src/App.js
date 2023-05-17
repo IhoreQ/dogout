@@ -42,7 +42,7 @@ function App() {
               <Route path="/places" element={<Places />} />
               <Route path="/my-doggy" element={<MyDoggy />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/place/:id" element="place:id" />
+              <Route path="/place/:id" element="place:id" /> { /* useParams() */}
             </Route>
           </Routes>
         </WarningContext.Provider>

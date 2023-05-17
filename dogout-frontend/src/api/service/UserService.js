@@ -110,9 +110,41 @@ const deleteDoggy = async () => {
     });
 }
 
-export default {
+const addDoggy = async (doggy, photoName) => {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    return await axios.post(
+        "/api/dog",
+        doggy, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Access-Control-Allow-Origin": '*',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        params: {
+            "email": email,
+            "photo": photoName
+        }
+    }).then(res => {
+        if (res != null)
+            return res;
+    }).catch(err => {
+        AuthenticationService.logout();
+        let error = "";
+        if (err.response)
+            error += err.response;
+        return error;
+    });
+}
+
+const exportedFunctions = {
     getActiveWalk,
     getDoggy,
     finishWalk,
-    deleteDoggy
+    deleteDoggy,
+    addDoggy
 };
+
+export default exportedFunctions;

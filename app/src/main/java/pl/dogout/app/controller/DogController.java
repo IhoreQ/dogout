@@ -34,12 +34,12 @@ public class DogController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addDog(@RequestBody DogAddRequest dogAddRequest) throws Exception {
-        User user = userService.getUserByEmail(dogAddRequest.email());
+    public ResponseEntity<HttpStatus> addDog(@RequestParam String email, @RequestParam String photo, @RequestBody DogAddRequest dogAddRequest) throws Exception {
+        User user = userService.getUserByEmail(email);
         if (user.hasDog())
             throw new Exception("User already has a dog!");
 
-        boolean isAdded = dogService.addDog(user, dogAddRequest);
+        boolean isAdded = dogService.addDog(user, dogAddRequest, photo);
 
         if (!isAdded)
             throw new Exception("An error occurred while adding a dog!");
@@ -66,8 +66,9 @@ public class DogController {
         ActiveWalk activeWalk = walkService.getActiveWalkByUser(user);
         boolean isDeleted = false;
 
-        if (activeWalk == null)
+        if (activeWalk == null) {
             isDeleted = dogService.deleteDog(user);
+        }
 
         return isDeleted ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
     }

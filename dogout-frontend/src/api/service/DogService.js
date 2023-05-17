@@ -26,6 +26,8 @@ const getBreeds = () => {
 
 }
 
-export default {
+const exportedFunctions = {
     getBreeds
 }
+
+export default exportedFunctions;

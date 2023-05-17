@@ -2,13 +2,11 @@ package pl.dogout.app.controller.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public record DogAddRequest(String email,
-                            String name,
+public record DogAddRequest(String name,
                             int age,
                             Long breedId,
                             boolean gender,
-                            String description,
-                            String photo) {
+                            String description) {
     @JsonCreator
     public DogAddRequest {
     }

@@ -25,8 +25,8 @@ public class ImageService {
 
         int nameLength = 10;
         String filename = UUID.randomUUID()
-                        .toString()
-                        .substring(0, nameLength);
+                .toString()
+                .substring(0, nameLength);
 
         imageRepository.save(Image.builder()
                 .name(filename)
@@ -39,6 +39,11 @@ public class ImageService {
     public Image downloadImage(String fileName) {
         Optional<Image> image = imageRepository.findByName(fileName);
         return image.orElse(null);
+    }
+
+    public void deleteImage(String imageName) {
+        Optional<Image> foundImage = imageRepository.findByName(imageName);
+        foundImage.ifPresent(image -> imageRepository.delete(image));
     }
 
 }

@@ -16,12 +16,14 @@ import java.util.Optional;
 public class DogService {
 
     private final UserService userService;
+    private final ImageService imageService;
     private final DogRepository dogRepository;
     private final DogBreedRepository dogBreedRepository;
 
     @Autowired
-    public DogService(UserService userService, DogRepository dogRepository, DogBreedRepository dogBreedRepository) {
+    public DogService(UserService userService, ImageService imageService, DogRepository dogRepository, DogBreedRepository dogBreedRepository) {
         this.userService = userService;
+        this.imageService = imageService;
         this.dogRepository = dogRepository;
         this.dogBreedRepository = dogBreedRepository;
     }
@@ -39,24 +41,24 @@ public class DogService {
         Optional<Dog> foundDog = dogRepository.findByOwner(user);
 
         if (foundDog.isPresent()) {
-            userService.changeHasDogState(user);
             Dog dog = foundDog.get();
+            imageService.deleteImage(dog.getPhoto());
+            userService.changeHasDogState(user);
             dogRepository.delete(dog);
 
             return true;
-
         } else {
             return false;
         }
     }
 
-    public boolean addDog(User user, DogAddRequest dogAddRequest) {
+    public boolean addDog(User user, DogAddRequest dogAddRequest, String photo) {
 
         Optional<DogBreed> foundBreed = dogBreedRepository.findById(dogAddRequest.breedId());
 
         if (foundBreed.isPresent()) {
             DogBreed breed = foundBreed.get();
-            Dog dog = new Dog(dogAddRequest.name(), dogAddRequest.age(), dogAddRequest.gender(), dogAddRequest.description(), breed, dogAddRequest.photo(), user);
+            Dog dog = new Dog(dogAddRequest.name(), dogAddRequest.age(), dogAddRequest.gender(), dogAddRequest.description(), breed, photo, user);
 
             dogRepository.save(dog);
             userService.changeHasDogState(user);

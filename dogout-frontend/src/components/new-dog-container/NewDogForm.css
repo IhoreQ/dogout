@@ -46,7 +46,7 @@
 
 .new-dog-form input {
     width: 300px;
-    background-color: #F5C9A1;
+    background-color: var(--light-color);
     border: none;
     outline: none;
     color: #92420F;
@@ -59,6 +59,11 @@
     font-family: 'Dosis';
     font-weight: 500;
 }
+
+.new-dog-form input:-internal-autofill-selected {
+    background-color: #F5C9A1;
+}
+
 
 .new-dog-form label {
     width: 300px;

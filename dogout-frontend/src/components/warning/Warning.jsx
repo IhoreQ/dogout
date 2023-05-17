@@ -20,7 +20,8 @@ const Warning = () => {
         ["WRONG_AGE", "You provided age in wrong format!"],
         ["WRONG_FILE_SIZE", "The file is too big!"],
         ["INVALID_NAME", "Provided name is invalid!"],
-        ["AGE_RANGE", "Age must be between 0 and 30!"]
+        ["AGE_RANGE", "Age must be between 0 and 30!"],
+        ["DOG_ADD", "Error occurred during adding dog process!"]
     ]);
 
     return (

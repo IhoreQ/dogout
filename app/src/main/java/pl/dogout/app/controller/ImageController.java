@@ -1,5 +1,6 @@
 package pl.dogout.app.controller;
 
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ public class ImageController {
     }
 
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
             String response = imageService.uploadImage(file);
             return ResponseEntity.ok(response);

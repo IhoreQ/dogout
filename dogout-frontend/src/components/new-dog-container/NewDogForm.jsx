@@ -7,21 +7,21 @@ import DogService from "../../api/service/DogService";
 import { WarningContext } from "../../App";
 
 import "./NewDogForm.css";
+import ImageService from "../../api/service/ImageService";
+import UserService from "../../api/service/UserService";
 
 const NewDogForm = () => {
 
     const [breeds, setBreeds] = useState([]);
     const [photoMessage, setPhotoMessage] = useState("Upload dog photo");
     const [uploadedImage, setUploadedImage] = useState(null);
-    const [loading, setLoading] = useState(true);
     const { setWarning, setWarningId } = useContext(WarningContext);
     const [dogInfo, setDogInfo] = useState({
         name: '',
         age: '',
         breedId: 0,
         gender: true,
-        description: '',
-        photo: ''
+        description: ''
     })
 
     useEffect(() => {
@@ -35,7 +35,6 @@ const NewDogForm = () => {
                         breedId: response[0].id
                     }
                 });
-                setLoading(false);
             } catch (error) {
                 console.error(error)
             }
@@ -61,8 +60,8 @@ const NewDogForm = () => {
     }
 
     const checkIfInputsAreEmpty = () => {
-        return dogInfo.name.length == 0 ||
-            dogInfo.description.length == 0 ||
+        return dogInfo.name.length === 0 ||
+            dogInfo.description.length === 0 ||
             uploadedImage == null
     }
 
@@ -93,19 +92,18 @@ const NewDogForm = () => {
     const validateName = () => {
         const pattern = /^(?=.{1,256}$)[A-ZĆŁŚŻŹa-ząćęńóśżź\\p{L}]+['-]?[A-ZĆŁŚŻŹa-ząćęńóśżź]+/;
         const matchOutput = dogInfo.name.match(pattern);
-        return matchOutput != null && matchOutput[0].length == dogInfo.name.length;
+        return matchOutput != null && matchOutput[0].length === dogInfo.name.length;
     }
 
     const validateAge = () => {
         return dogInfo.age >= 0 && dogInfo.age <= 30;
     }
 
-    const handleAddDogClick = (event) => {
+    const handleAddDogClick = async (event) => {
         event.preventDefault();
 
         if (checkIfInputsAreEmpty()) {
-            setWarningId("EMPTY_INPUTS");
-            setWarning(true);
+            triggerWarning("EMPTY_INPUTS");
             return;
         }
 
@@ -121,10 +119,22 @@ const NewDogForm = () => {
             triggerWarning("AGE_RANGE");
         }
         else {
+            // TODO NAPRAW TO KURWA
+            const res = await ImageService.uploadImage(uploadedImage);
 
+            if (res.status !== 200) {
+                triggerWarning("WRONG_FILE_SIZE");
+            } else {
+                const photoName = res.data;
+                const response = await UserService.addDoggy(dogInfo, photoName);
+
+                if (response.status === 201) {
+                    window.location.reload(false);
+                } else {
+                    triggerWarning("DOG_ADD");
+                }
+            }
         }
-        console.log(dogInfo);
-
     }
 
     return (

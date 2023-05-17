@@ -27,7 +27,8 @@ const getAllPlaces = async () => {
     });
 }
 
-
-export default {
+const exportedFunctions = {
     getAllPlaces
-};
+}
+
+export default exportedFunctions;
