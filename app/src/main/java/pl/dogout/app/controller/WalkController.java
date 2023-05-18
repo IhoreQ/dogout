@@ -1,11 +1,13 @@
 package pl.dogout.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dogout.app.controller.dto.request.WalkStartRequest;
 import pl.dogout.app.controller.dto.response.DogInfoResponse;
 import pl.dogout.app.controller.dto.response.UserActiveWalkResponse;
+import pl.dogout.app.controller.dto.response.WalkProblemResponse;
 import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.Place;
@@ -34,22 +36,22 @@ public class WalkController {
     }
 
     @PostMapping
-    public ResponseEntity<String> goForAWalk(@RequestBody WalkStartRequest request) throws Exception {
+    public ResponseEntity<?> goForAWalk(@RequestBody WalkStartRequest request) throws Exception {
 
         User user = userService.getUserByEmail(request.email());
 
         if (!user.hasDog()) {
-            throw new Exception("User has no dog!");
+            return ResponseEntity.ok(new WalkProblemResponse("DOG"));
         }
 
         if (!user.getActiveWalks().isEmpty()) {
-            throw new Exception("User is already on a walk!");
+            return ResponseEntity.ok(new WalkProblemResponse("WALK"));
         }
 
         ActiveWalk activeWalk = new ActiveWalk(request.timeOfAWalk(), LocalTime.now(), new Place(request.placeId()), user);
 
         walkService.saveWalk(activeWalk);
-        return ResponseEntity.ok("Gone");
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping

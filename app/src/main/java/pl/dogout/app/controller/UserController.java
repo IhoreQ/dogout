@@ -21,7 +21,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PutMapping("/password")
+    @PatchMapping("/password")
     public ResponseEntity<String> updatePassword(@RequestBody PasswordUpdateRequest request) {
         User user =  userService.getUserByEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.newPassword()));

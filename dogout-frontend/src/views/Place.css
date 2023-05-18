@@ -1,0 +1,178 @@
+.place-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.place-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.place-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    background: #92420F;
+    font-size: 3rem;
+    font-weight: 500;
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+    text-shadow: var(--main-text-shadow);
+    text-align: center;
+}
+
+.place-return-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    background: #134E5E;
+    font-size: 2rem;
+    border-radius: 0 0 0 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.place-return-box a {
+    text-decoration: none;
+    color: #F5C9A1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.place-return-box svg {
+    font-size: 3rem;
+}
+
+.place-return-box:hover {
+    background: #155769;
+}
+
+.place-dogs-container {
+    height: 63%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #134E5E;
+    border-radius: 20px 20px 50px 50px;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.3);
+    font-size: 2rem;
+}
+
+.dogs-here-container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dogs-here-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dog-count-header {
+    width: 100%;
+    height: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+    font-size: 2.5rem;
+    font-weight: 500;
+    background: #092F39;
+    text-align: center;
+}
+
+.dog-list, .dog-list-header {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.7rem;
+    padding: 10px 0;
+}
+
+.new-places-idea-list-header, .new-places-idea-list {
+    justify-content: space-evenly;
+}
+
+.dog-list::after {
+    position: absolute;
+    width: 90%;
+    height: 3px;
+    content: "";
+    background: #092F39;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+}
+
+.dog-list-header::after {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    content: "";
+    background: #092F39;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+}
+
+.dog-list-header {
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.dog-list li, .dog-list-header li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    text-align: center;
+}
+
+.go-for-walk-box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.walk-time {
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.walk-select {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: var(--light-color);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+.walk-select option {
+    background: #134E5E;
+}

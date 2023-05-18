@@ -11,7 +11,10 @@ import Settings from "./views/Settings";
 import GuestRoutes from "./components/route-settings/GuestRoutes";
 import UserRoutes from "./components/route-settings/UserRoutes";
 
+import Test from "./views/Test";
+
 import "./App.css"
+import Place from "./views/Place";
 
 export const WarningContext = createContext(null);
 
@@ -33,6 +36,7 @@ function App() {
               <Route path="/" element={<Navigator />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/test" element={<Test />} />
             </Route>
 
             {/* User paths */}
@@ -42,7 +46,7 @@ function App() {
               <Route path="/places" element={<Places />} />
               <Route path="/my-doggy" element={<MyDoggy />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/place/:id" element="place:id" /> { /* useParams() */}
+              <Route path="/place/:id" element={<Place />} />
             </Route>
           </Routes>
         </WarningContext.Provider>

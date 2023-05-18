@@ -27,8 +27,33 @@ const getAllPlaces = async () => {
     });
 }
 
+const getPlaceName = async (id) => {
+    const token = localStorage.getItem("token");
+
+    return await axios.get(
+        `/api/place/${id}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Access-Control-Allow-Origin": '*',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res != null)
+                return res;
+        }).catch(err => {
+            AuthenticationService.logout();
+            let error = "";
+            if (err.response)
+                error += err.response;
+            return error;
+        });
+}
+
 const exportedFunctions = {
-    getAllPlaces
+    getAllPlaces,
+    getPlaceName
 }
 
 export default exportedFunctions;
