@@ -22,12 +22,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/walk")
 public class WalkController {
-
-
     private final UserService userService;
 
     private final WalkService walkService;
-
 
     @Autowired
     public WalkController(UserService userService, WalkService walkService) {
