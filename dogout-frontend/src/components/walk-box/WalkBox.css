@@ -10,11 +10,11 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
     color: var(--light-color);
     animation-name: text-fade-in;
-    -webkit-animation-name: text-fade-in; 
-    animation-duration: 0.2s;   
+    -webkit-animation-name: text-fade-in;
+    animation-duration: 0.2s;
     -webkit-animation-duration: 0.2s;
-    animation-timing-function: ease-in-out; 
-    -webkit-animation-timing-function: ease-in-out; 
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
 }
 
 .active-walk-box::after {
@@ -51,7 +51,8 @@
     text-shadow: var(--main-text-shadow);
 }
 
-.active-walk-symmetric-p, .active-walk-p {
+.active-walk-symmetric-p,
+.active-walk-p {
     width: 25%;
     text-align: end;
 }
@@ -63,7 +64,7 @@
 .active-walk-box-color {
     width: 100%;
     height: 100%;
-    background-color:#F5C9A1;
+    background-color: #F5C9A1;
     border-radius: 0 0 50px 50px;
     mix-blend-mode: color;
 }
@@ -97,4 +98,25 @@
 
 .invisible {
     visibility: hidden;
+}
+
+@media only screen and (max-width: 960px) {
+    .active-walk-box {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .active-walk-box {
+        width: 100%;
+    }
+
+    .active-walk-box-header {
+        padding-right: 0.2rem;
+        justify-content: space-between;
+    }
+
+    .active-walk-box-header p {
+        padding: 0;
+    }
 }

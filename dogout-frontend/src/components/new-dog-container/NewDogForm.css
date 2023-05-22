@@ -119,3 +119,19 @@
     color: #92420F;
     font-family: var(--main-font-family);
 }
+
+@media only screen and (max-width: 960px) {
+    .new-dog-paw svg {
+        font-size: 45rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .new-dog-form input,
+    .new-dog-form select,
+    .new-dog-form textarea,
+    .new-dog-form label,
+    .new-dog-form .sign-button {
+        width: 90%;
+    }
+}

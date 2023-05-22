@@ -34,3 +34,10 @@
     animation-timing-function: ease-in-out; 
     -webkit-animation-timing-function: ease-in-out; 
 }
+
+@media only screen and (max-width: 960px) {
+    .home-container {
+        height: 100%;
+        flex-direction: column;
+    }
+}

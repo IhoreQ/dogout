@@ -7,11 +7,11 @@
     overflow-x: hidden;
     color: var(--light-color);
     animation-name: text-fade-in;
-    -webkit-animation-name: text-fade-in; 
-    animation-duration: 0.2s;   
+    -webkit-animation-name: text-fade-in;
+    animation-duration: 0.2s;
     -webkit-animation-duration: 0.2s;
-    animation-timing-function: ease-in-out; 
-    -webkit-animation-timing-function: ease-in-out; 
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
 }
 
 .doggy-name-container {
@@ -40,7 +40,8 @@
     justify-content: space-evenly;
 }
 
-.left-dog-info, .right-dog-info {
+.left-dog-info,
+.right-dog-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -134,4 +135,68 @@
 
 .doggy-footer-remove-box:hover {
     background: var(--blue-hover-color);
+}
+
+@media only screen and (max-width: 960px) {
+    .doggy-info-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70%;
+    }
+
+    .doggy-name-container {
+        margin-bottom: 1rem;
+    }
+
+    .left-dog-info,
+    .right-dog-info {
+        flex-direction: row;
+        width: 100%;
+        height: 25%;
+        margin-bottom: 1rem;
+    }
+
+    .dog-photo-box {
+        order: -1;
+        margin-bottom: 1rem;
+    }
+
+    .dog-photo {
+        width: 300px;
+        height: 300px;
+    }
+
+    .doggy-description-container {
+        height: 20%;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .dog-photo-box {
+        width: 100%;
+    }
+
+    .dog-photo {
+        width: 250px;
+        height: 250px;
+    }
+
+    .doggy-name-container {
+        width: 100%;
+    }
+
+    .description-box {
+        width: 90%;
+    }
+
+    .doggy-footer-remove-box {
+        width: 100%;
+        border-radius: 50px 50px 0 0;
+        margin-top: 1rem;
+    }
+
+    .doggy-description-container {
+        margin-bottom: 1rem;
+    }
 }

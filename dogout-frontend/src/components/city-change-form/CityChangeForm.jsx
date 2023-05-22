@@ -29,6 +29,7 @@ const CityChangeForm = () => {
 
     const handleClick = (event) => {
         event.preventDefault();
+        console.log(city);
     }
 
     return (

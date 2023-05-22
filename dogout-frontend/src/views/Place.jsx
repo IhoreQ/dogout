@@ -44,7 +44,7 @@ const Place = () => {
             try {
                 const response = await walkService.getDogs(id);
                 if (response.status === 200) {
-                    setDogs(response);
+                    setDogs(response.data);
                     setDogsLoading(false);
                 }
             } catch (error) {
@@ -98,7 +98,6 @@ const Place = () => {
                                 )
 
                             }
-
                         </div>
                     </div>
                 </div>

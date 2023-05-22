@@ -15,7 +15,7 @@
 
 .walk-time {
     font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--main-text-shadow);
     text-align: center;
 }
 
@@ -25,10 +25,30 @@
     border: none;
     color: var(--light-color);
     font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-shadow: var(--main-text-shadow);
     outline: none;
 }
 
 .walk-select option {
     background: #134E5E;
+}
+
+
+@media only screen and (max-width: 520px) {
+
+.dog-list-header {
+    font-size: 1.3rem !important;
+}
+
+.dog-list {
+    font-size: 1rem !important;
+}
+
+    .walk-time {
+        font-size: 1.3rem !important;
+    }
+
+    .walk-select {
+        font-size: 1.3rem !important;
+    }
 }

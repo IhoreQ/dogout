@@ -188,3 +188,47 @@
 .walk-select option {
     background: #134E5E;
 }
+
+@media only screen and (max-width: 960px) {
+
+    .place-dogs-container {
+        width: 95%;
+    }
+
+    .dog-list-header {
+        font-size: 1.5rem;
+    }
+
+    .dog-list {
+        font-size: 1.2rem;
+    }
+
+    .place-name {
+        font-size: 2rem;
+        width: 300px;
+    }
+
+    .place-return-box {
+        width: 75px;
+    }
+
+    .place-return-box svg {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+
+    .place-header {
+        background: #92420F;
+    }
+
+    .place-return-box {
+        background: #92420F;
+        border-radius: 0;
+    }
+
+    .place-return-box:hover {
+        background: #ad4f14;
+    }
+}

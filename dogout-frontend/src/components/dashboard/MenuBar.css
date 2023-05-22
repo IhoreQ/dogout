@@ -86,3 +86,25 @@
 .menu-bar-element.is-active::after {
     display: none;
 }
+
+@media only screen and (max-width: 960px) {
+    .menu-bar {
+        display: none;
+    }
+
+    .menu-bar-active {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        top: 90px;
+    }
+
+    .menu-bar-list {
+        margin: 0;
+        text-align: center;
+    }
+
+    .menu-bar-element a, .log-out-button a {
+        margin-left: 0;
+    }
+}

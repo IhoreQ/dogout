@@ -5,7 +5,6 @@ import Dashboard from "../components/dashboard/Dashboard";
 import ContentContainer from "../components/common/ContentContainer";
 import userService from "../api/service/userService";
 import { useEffect, useState } from "react";
-import authenticationService from "../api/service/authenticationService";
 import Loading from "../components/common/Loading";
 
 import "./Home.css";
