@@ -112,7 +112,7 @@
     height: 10%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .doggy-footer-remove-box {

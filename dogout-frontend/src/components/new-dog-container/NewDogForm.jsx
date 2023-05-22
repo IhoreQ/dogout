@@ -3,12 +3,12 @@ import PetsIcon from '@mui/icons-material/Pets';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SignButton from "../common/SignButton";
 import CustomSelect from "../common/CustomSelect";
-import DogService from "../../api/service/DogService";
+import dogService from "../../api/service/dogService";
 import { WarningContext } from "../../App";
 
 import "./NewDogForm.css";
-import ImageService from "../../api/service/ImageService";
-import UserService from "../../api/service/UserService";
+import imageService from "../../api/service/imageService";
+import userService from "../../api/service/userService";
 
 const NewDogForm = () => {
 
@@ -27,7 +27,7 @@ const NewDogForm = () => {
     useEffect(() => {
         const fetchBreeds = async () => {
             try {
-                const { data: response } = await DogService.getBreeds();
+                const { data: response } = await dogService.getBreeds();
                 setBreeds(response);
                 setDogInfo(prevInfo => {
                     return {
@@ -120,13 +120,13 @@ const NewDogForm = () => {
         }
         else {
             // TODO NAPRAW TO KURWA
-            const res = await ImageService.uploadImage(uploadedImage);
+            const res = await imageService.uploadImage(uploadedImage);
 
             if (res.status !== 200) {
                 triggerWarning("WRONG_FILE_SIZE");
             } else {
                 const photoName = res.data;
-                const response = await UserService.addDoggy(dogInfo, photoName);
+                const response = await userService.addDoggy(dogInfo, photoName);
 
                 if (response.status === 201) {
                     window.location.reload(false);

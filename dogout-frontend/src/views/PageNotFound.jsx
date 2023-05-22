@@ -10,10 +10,10 @@ function PageNotFound() {
     const returnToHomePage = () => {
         navigate("/login");
     }
-        
+
     React.useEffect(() => {
         document.title = '404 Not Found | DogOut';
-      }, []);
+    }, []);
 
     return (
         <div className='not-found-container'>

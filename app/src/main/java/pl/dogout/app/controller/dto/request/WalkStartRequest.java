@@ -1,7 +1,6 @@
 package pl.dogout.app.controller.dto.request;
 
-public record WalkStartRequest(String email,
-                               String timeOfAWalk,
+public record WalkStartRequest(String timeOfAWalk,
                                Long placeId) {
 
     public WalkStartRequest {}

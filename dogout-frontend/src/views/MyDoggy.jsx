@@ -3,7 +3,7 @@ import MainBox from "../components/common/MainBox";
 import AppWrapper from "../components/common/AppWrapper";
 import Dashboard from "../components/dashboard/Dashboard";
 import { useState, useEffect, useContext } from "react";
-import UserService from "../api/service/UserService";
+import userService from "../api/service/userService";
 import ContentContainer from "../components/common/ContentContainer";
 import Loading from "../components/common/Loading";
 import DogInfoContainer from "../components/dog-info-container/DogInfoContainer";
@@ -22,7 +22,7 @@ const MyDoggy = () => {
     useEffect(() => {
         const fetchDoggy = async () => {
             try {
-                const { data: response } = await UserService.getDoggy();
+                const { data: response } = await userService.getDoggy();
                 setDoggy(response);
                 setLoading(false);
             } catch (error) {
@@ -41,16 +41,16 @@ const MyDoggy = () => {
                 <Dashboard activeElement="my-doggy" />
                 <ContentContainer>
                     {loading && <Loading />}
-                    {!loading && 
+                    {!loading &&
                         <div className="my-doggy-container">
-                        {doggy ?
-                            <DogInfoContainer doggy={doggy} />
-                            :
-                            <NewDogContainer />
-                        }
-                    </div>
+                            {doggy ?
+                                <DogInfoContainer doggy={doggy} />
+                                :
+                                <NewDogContainer />
+                            }
+                        </div>
                     }
-                    
+
                 </ContentContainer>
             </AppWrapper>
         </MainBox>

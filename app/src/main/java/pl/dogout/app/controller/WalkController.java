@@ -12,6 +12,7 @@ import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.Place;
 import pl.dogout.app.model.User;
+import pl.dogout.app.service.JwtService;
 import pl.dogout.app.service.UserService;
 import pl.dogout.app.service.WalkService;
 
@@ -25,17 +26,20 @@ public class WalkController {
     private final UserService userService;
 
     private final WalkService walkService;
+    private final JwtService jwtService;
 
     @Autowired
-    public WalkController(UserService userService, WalkService walkService) {
+    public WalkController(UserService userService, WalkService walkService, JwtService jwtService) {
         this.userService = userService;
         this.walkService = walkService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping
-    public ResponseEntity<?> goForAWalk(@RequestBody WalkStartRequest request) throws Exception {
+    public ResponseEntity<?> goForAWalk(@RequestHeader("Authorization") String header, @RequestBody WalkStartRequest request) throws Exception {
 
-        User user = userService.getUserByEmail(request.email());
+        String email = jwtService.extractEmailFromHeader(header);
+        User user = userService.getUserByEmail(email);
 
         if (!user.hasDog()) {
             return ResponseEntity.ok(new WalkProblemResponse("DOG"));
@@ -52,7 +56,9 @@ public class WalkController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getActiveWalk(@RequestParam String email) {
+    public ResponseEntity<?> getActiveWalk(@RequestHeader("Authorization") String header) {
+
+        String email = jwtService.extractEmailFromHeader(header);
         User user = userService.getUserByEmail(email);
 
         ActiveWalk activeWalk = walkService.getActiveWalkByUser(user);
@@ -76,8 +82,9 @@ public class WalkController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> finishWalk(@RequestParam String email) throws Exception {
+    public ResponseEntity<String> finishWalk(@RequestHeader("Authorization") String header) throws Exception {
 
+        String email = jwtService.extractEmailFromHeader(header);
         User user = userService.getUserByEmail(email);
         Collection<ActiveWalk> activeWalks = user.getActiveWalks();
 

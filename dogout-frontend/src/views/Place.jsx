@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import MainBox from "../components/common/MainBox";
 import HomeIcon from '@mui/icons-material/Home';
-
-import "./Place.css";
 import PlaceForm from "../components/place-form/PlaceForm";
-import PlaceService from "../api/service/PlaceService";
-import WalkService from "../api/service/WalkService";
+import placeService from "../api/service/placeService";
+import walkService from "../api/service/walkService";
 import Warning from "../components/warning/Warning";
 import { WarningContext } from "../App";
+
+import "./Place.css";
 
 const Place = () => {
 
@@ -22,7 +22,7 @@ const Place = () => {
     useEffect(() => {
         const fetchPlaceName = async (id) => {
             try {
-                const { data: response } = await PlaceService.getPlaceName(id);
+                const { data: response } = await placeService.getPlaceName(id);
                 if (response === false) {
                     navigate("/place-not-found");
                 }
@@ -34,9 +34,8 @@ const Place = () => {
 
         const fetchDogsHere = async (id) => {
             try {
-                const { data: response } = await WalkService.getDogs(id);
+                const { data: response } = await walkService.getDogs(id);
                 setDogs(response);
-                console.log(response);
             } catch (error) {
                 console.error(error)
             }

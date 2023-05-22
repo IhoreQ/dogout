@@ -3,9 +3,9 @@ import MainBox from "../components/common/MainBox";
 import AppWrapper from "../components/common/AppWrapper";
 import Dashboard from "../components/dashboard/Dashboard";
 import ContentContainer from "../components/common/ContentContainer";
-import UserService from "../api/service/UserService";
+import userService from "../api/service/userService";
 import { useEffect, useState } from "react";
-import AuthenticationService from "../api/service/AuthenticationService";
+import authenticationService from "../api/service/authenticationService";
 import Loading from "../components/common/Loading";
 
 import "./Home.css";
@@ -23,11 +23,11 @@ const Home = () => {
     useEffect(() => {
         const fetchActiveWalk = async () => {
             try {
-                const { data: response } = await UserService.getActiveWalk();
+                const { data: response } = await userService.getActiveWalk();
                 setActiveWalk(response);
                 setLoading(false);
             } catch (error) {
-                AuthenticationService.logout();
+                authenticationService.logout();
             }
         };
 

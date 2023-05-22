@@ -3,9 +3,8 @@ import MainBox from "../components/common/MainBox";
 import AppWrapper from "../components/common/AppWrapper";
 import Dashboard from "../components/dashboard/Dashboard";
 import ContentContainer from "../components/common/ContentContainer";
-import PlaceService from "../api/service/PlaceService";
+import placeService from "../api/service/placeService";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import PlaceBox from "../components/common/PlaceBox";
 import Loading from "../components/common/Loading";
 
@@ -25,7 +24,7 @@ const Places = () => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const { data: response } = await PlaceService.getAllPlaces();
+        const { data: response } = await placeService.getAllPlaces();
         setPlaces(response);
         setLoading(false);
       } catch (error) {

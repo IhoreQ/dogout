@@ -1,54 +1,20 @@
-import axios from "axios";
-import AuthenticationService from "./AuthenticationService";
+import api from "../interceptor/tokenInterceptor";
 
 const getAllPlaces = async () => {
-
-    const token = localStorage.getItem("token");
-
-    return axios.get(
-        "/api/place/all", {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-    }).then(res => {
-        if (res != null)
-            return res;
-    }).catch(err => {
-        // TODO  Zamiast tego wyświetlić komunikat, że sesja wygasła, gdy wystąpi błąd 403 i po kliknięciu wylogować
-        AuthenticationService.logout();
-        let error = "";
-        if (err.response)
-            error += err.response;
-        return error;
-    });
+    try {
+        return await api.get("/place/all");
+    } catch (err) {
+        return err;
+    }
 }
 
 const getPlaceName = async (id) => {
-    const token = localStorage.getItem("token");
-
-    return await axios.get(
-        `/api/place/${id}`,
-        {
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Access-Control-Allow-Origin": '*',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            if (res != null)
-                return res;
-        }).catch(err => {
-            AuthenticationService.logout();
-            let error = "";
-            if (err.response)
-                error += err.response;
-            return error;
-        });
+    try {
+        return await api.get(`/place/${id}`);
+    } catch (err) {
+        return err;
+    }
+    
 }
 
 const exportedFunctions = {

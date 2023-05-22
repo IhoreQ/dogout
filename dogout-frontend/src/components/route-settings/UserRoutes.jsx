@@ -1,9 +1,9 @@
 import React from "react";
-import AuthenticationService from "../../api/service/AuthenticationService";
+import authenticationService from "../../api/service/authenticationService";
 import { Outlet, Navigate } from "react-router-dom";
 
 const UserRoutes = () => {
-    const state = AuthenticationService.isUserLoggedIn();
+    const state = authenticationService.isUserLoggedIn();
     return state ? <Outlet /> : <Navigate to="/login" />;
 }
 

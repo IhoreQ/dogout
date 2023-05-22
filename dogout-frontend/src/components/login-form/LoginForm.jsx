@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-import AuthenticationService from '../../api/service/AuthenticationService';
+import authenticationService from '../../api/service/authenticationService';
 import SignButton from "../common/SignButton";
 
 import "./LoginForm.css";
@@ -49,7 +49,7 @@ const LoginForm = () => {
             setMessage("Password is too short!");
         }
         else {
-            const res = await AuthenticationService.authenticateUser(userInfo);
+            const res = await authenticationService.authenticateUser(userInfo);
 
             if (res.status === 200) {
                 if (res.data.jwtToken.length === 0) {
@@ -60,8 +60,7 @@ const LoginForm = () => {
                     })
                 } else {
                     const jwtToken = res.data.jwtToken;
-                    AuthenticationService.setToken(jwtToken);
-                    AuthenticationService.setLoggedInUser(userInfo.email);
+                    authenticationService.setToken(jwtToken);
                     navigate("/home");
                 }
             } else {

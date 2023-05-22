@@ -1,142 +1,47 @@
-import axios from "axios";
-import AuthenticationService from "./AuthenticationService";
+import api from "../interceptor/tokenInterceptor";
 
 const getActiveWalk = async () => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-
-    return axios.get(
-        "/api/walk", {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        params: {
-            "email": email
-        }
-    }).then(res => {
-        if (res != null)
-            return res;
-    })
-        .catch(err => {
-            AuthenticationService.logout();
-            let error = "";
-            if (err.response)
-                error += err.response;
-            return error;
-        });
-}
-
-const getDoggy = async () => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-
-    return await axios.get(
-        "/api/dog", {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        params: {
-            "email": email
-        }
-    }).then(res => {
-        if (res != null)
-            return res;
-    }).catch(err => {
-        AuthenticationService.logout();
-        let error = "";
-        if (err.response)
-            error += err.response;
-        return error;
-    });
+    try {
+        return await api.get('/walk');
+    } catch (err) {
+        return err;
+    }
 }
 
 const finishWalk = async () => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
+    try {
+        return await api.delete('/walk');
+    } catch (err) {
+        return err;
+    }
+}
 
-    return await axios.delete(
-        "/api/walk", {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        params: {
-            "email": email
-        }
-    }).then(res => {
-        if (res != null)
-            return res;
-    }).catch(err => {
-        AuthenticationService.logout();
-        let error = "";
-        if (err.response)
-            error += err.response;
-        return error;
-    });
+const getDoggy = async () => {
+    try {
+        return await api.get('/dog');
+    } catch (err) {
+        return err;
+    }
 }
 
 const deleteDoggy = async () => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-
-    return await axios.delete(
-        "/api/dog", {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        params: {
-            "email": email
-        }
-    }).then(res => {
-        if (res != null)
-            return res;
-    }).catch(err => {
-        AuthenticationService.logout();
-        let error = "";
-        if (err.response)
-            error += err.response;
-        return error;
-    });
+    try {
+        return await api.delete('/dog');
+    } catch (err) {
+        return err;
+    }
 }
 
 const addDoggy = async (doggy, photoName) => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-
-    return await axios.post(
-        "/api/dog",
-        doggy, {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": '*',
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        params: {
-            "email": email,
-            "photo": photoName
-        }
-    }).then(res => {
-        if (res != null)
-            return res;
-    }).catch(err => {
-        AuthenticationService.logout();
-        let error = "";
-        if (err.response)
-            error += err.response;
-        return error;
-    });
+    try {
+        return await api.post('/dog', doggy, {
+            params: {
+                "photo": photoName
+            }
+        });
+    } catch (err) {
+        return err;
+    }
 }
 
 const exportedFunctions = {

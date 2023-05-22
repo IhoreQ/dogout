@@ -5,14 +5,14 @@ import PetsIcon from '@mui/icons-material/Pets';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
-import AuthenticationService from '../../api/service/AuthenticationService';
+import authenticationService from '../../api/service/authenticationService';
 
 import "./MenuBar.css";
 
 const MenuBar = ({ activeElement }) => {
 
     const handleLogoutClick = () => {
-        AuthenticationService.logout();
+        authenticationService.logout();
     }
 
     let home = false, places = false, myDoggy = false, settings = false;

@@ -1,5 +1,6 @@
 package pl.dogout.app.config.security;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -89,7 +90,14 @@ public class SecurityConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-        List<String> allowedOrigins = List.of("http://localhost:3000");
+
+        List<String> allowedOrigins = new ArrayList<>();
+
+        Dotenv dotenv = Dotenv.load();
+        String localhostOrigin = dotenv.get("LOCALHOST_ORIGIN");
+        if (localhostOrigin != null)
+            allowedOrigins.add(localhostOrigin);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);

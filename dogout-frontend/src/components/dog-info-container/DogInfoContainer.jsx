@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import DogInfoBox from "./DogInfoBox";
 import DeleteIcon from '@mui/icons-material/Delete';
-import UserService from "../../api/service/UserService";
+import userService from "../../api/service/userService";
 import Warning from "../warning/Warning";
 import AppCover from "../common/AppCover";
 import { WarningContext } from "../../App";
@@ -13,7 +13,7 @@ const DogInfoContainer = ({ doggy }) => {
     const { setWarning, setWarningId } = useContext(WarningContext);
 
     const deleteDogRequest = useCallback(async () => {
-        const res = await UserService.deleteDoggy();
+        const res = await userService.deleteDoggy();
         const isDeleted = res.data;
 
         setWarningId("DOG_DELETE");

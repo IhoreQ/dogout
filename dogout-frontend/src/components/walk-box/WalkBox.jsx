@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import UserService from "../../api/service/UserService";
+import userService from "../../api/service/userService";
 
 import "./WalkBox.css";
 
@@ -9,7 +9,7 @@ const WalkBox = ({ name, time, photo }) => {
     const [timeLeft, setTimeLeft] = useState(time);
 
     const handleFinishClick = () => {
-        UserService.finishWalk();
+        userService.finishWalk();
         window.location.reload(false);
     }
 

@@ -1,5 +1,6 @@
 package pl.dogout.app.service;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,10 +19,14 @@ import java.util.function.Function;
 public class JwtService {
 
     public static final long JWT_TOKEN_EXPIRATION = 5 * 60 * 60;
-    public static final String SECRET_KEY = "7336763979244226452948404D635166546A576E5A7234753777217A25432A46";
 
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public String extractEmailFromHeader(String header) {
+        String token = header.substring(7);
+        return extractEmail(token);
     }
 
     public Date extractExpiration(String token) {
@@ -66,9 +71,9 @@ public class JwtService {
     }
 
     private Key getSignKey() {
-        byte[] key = Base64.getDecoder().decode(SECRET_KEY);
+        Dotenv dotenv = Dotenv.load();
+        byte[] key = Base64.getDecoder().decode(dotenv.get("SECRET_KEY"));
         return Keys.hmacShaKeyFor(key);
     }
-
 
 }

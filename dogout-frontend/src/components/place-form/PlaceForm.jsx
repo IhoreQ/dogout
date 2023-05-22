@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import SignButton from "../common/SignButton";
-import WalkService from "../../api/service/WalkService";
+import walkService from "../../api/service/walkService";
 import { useNavigate } from "react-router-dom";
 import { WarningContext } from "../../App";
 
@@ -31,7 +31,7 @@ const PlaceForm = ({ placeId }) => {
     const handleGoClick = async (event) => {
         event.preventDefault();
 
-        const res = await WalkService.goForAWalk(walkInfo);
+        const res = await walkService.goForAWalk(walkInfo);
 
         if (res.status !== 201) {
             const message = res.data.errorMessage;

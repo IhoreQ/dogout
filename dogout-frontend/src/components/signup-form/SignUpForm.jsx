@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import BadgeIcon from '@mui/icons-material/Badge';
 import SignButton from "../common/SignButton";
-import AuthenticationService from "../../api/service/AuthenticationService";
+import authenticationService from "../../api/service/authenticationService";
 
 import "./SignUpForm.css";
 
@@ -60,7 +60,7 @@ const SignUpForm = () => {
             setMessage("Provided wrong password!");
         }
         else {
-            const response = await AuthenticationService.signup(userInfo);
+            const response = await authenticationService.signup(userInfo);
             
             if (response.status === 201) {
                 navigate("/login");

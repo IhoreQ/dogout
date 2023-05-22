@@ -1,36 +1,19 @@
 import axios from "axios";
 
 const authenticateUser = async (userInfo) => {
-    return axios.post(
-        "/api/auth/authenticate",
-        userInfo
-    ).then((res) => {
-        if (res != null) {
-            return res;
-        }
-    })
-        .catch(err => {
-            let error = "";
-            if (err.response)
-                error += err.respfonse;
-            return error;
-        })
+    try {
+        return await axios.post("/api/auth/authenticate", userInfo);
+    } catch (err) {
+        return err.response;
+    }
 }
 
 const signup = async (userInfo) => {
-    return axios.post(
-        "/api/auth/signup",
-        userInfo
-    ).then(res => {
-        if (res != null)
-            return res;
-    })
-        .catch(err => {
-            let error = "";
-            if (err.response)
-                error += err.response;
-            return error;
-        })
+    try {
+        return await axios.post("/api/auth/signup", userInfo);
+    } catch (err) {
+        return err.response;
+    }
 }
 
 const logout = () => {
@@ -38,35 +21,21 @@ const logout = () => {
     sessionStorage.clear();
 }
 
-const setLoggedInUser = (email) => {
-    localStorage.setItem("email", email);
-}
-
 const setToken = (jwtToken) => {
     localStorage.setItem("token", jwtToken);
 }
 
 const isUserLoggedIn = () => {
-    let user = localStorage.getItem("email");
-    return user == null ? false : true;
-}
-
-const getUserEmail = () => {
-    let email = localStorage.getItem("email");
-    if (email == null)
-        return "";
-    else
-        return email;
+    let user = localStorage.getItem("token");
+    return user != null;
 }
 
 const exportedFunctions = {
     authenticateUser,
     signup,
     logout,
-    setLoggedInUser,
     setToken,
-    isUserLoggedIn,
-    getUserEmail
+    isUserLoggedIn
 }
 
 export default exportedFunctions;

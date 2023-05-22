@@ -12,6 +12,7 @@ import pl.dogout.app.model.Dog;
 import pl.dogout.app.model.DogBreed;
 import pl.dogout.app.model.User;
 import pl.dogout.app.service.DogService;
+import pl.dogout.app.service.JwtService;
 import pl.dogout.app.service.UserService;
 import pl.dogout.app.service.WalkService;
 
@@ -25,16 +26,21 @@ public class DogController {
     private final DogService dogService;
     private final UserService userService;
     private final WalkService walkService;
+    private final JwtService jwtService;
 
     @Autowired
-    public DogController(DogService dogService, UserService userService, WalkService walkService) {
+    public DogController(DogService dogService, UserService userService, WalkService walkService, JwtService jwtService) {
         this.dogService = dogService;
         this.userService = userService;
         this.walkService = walkService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addDog(@RequestParam String email, @RequestParam String photo, @RequestBody DogAddRequest dogAddRequest) throws Exception {
+    public ResponseEntity<HttpStatus> addDog(@RequestHeader("Authorization") String header, @RequestParam String photo, @RequestBody DogAddRequest dogAddRequest) throws Exception {
+
+        String email = jwtService.extractEmailFromHeader(header);
+
         User user = userService.getUserByEmail(email);
         if (user.hasDog())
             throw new Exception("User already has a dog!");
@@ -48,7 +54,9 @@ public class DogController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getDogInfo(@RequestParam String email) {
+    public ResponseEntity<?> getDogInfo(@RequestHeader("Authorization") String header) {
+
+        String email = jwtService.extractEmailFromHeader(header);
 
         User user = userService.getUserByEmail(email);
         if (!user.hasDog())
@@ -61,7 +69,10 @@ public class DogController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Boolean> deleteDog(@RequestParam String email) {
+    public Boolean deleteDog(@RequestHeader("Authorization") String header) {
+
+        String email = jwtService.extractEmailFromHeader(header);
+
         User user = userService.getUserByEmail(email);
         ActiveWalk activeWalk = walkService.getActiveWalkByUser(user);
         boolean isDeleted = false;
@@ -70,7 +81,7 @@ public class DogController {
             isDeleted = dogService.deleteDog(user);
         }
 
-        return isDeleted ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
+        return isDeleted;
     }
 
     @GetMapping("/breeds")
