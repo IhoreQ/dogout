@@ -23,11 +23,13 @@ const Home = () => {
     useEffect(() => {
         const fetchActiveWalk = async () => {
             try {
-                const { data: response } = await userService.getActiveWalk();
-                setActiveWalk(response);
-                setLoading(false);
+                const response = await userService.getActiveWalk();
+                if (response.status === 200) {
+                    setActiveWalk(response.data);
+                    setLoading(false);
+                }
             } catch (error) {
-                authenticationService.logout();
+                console.error(error);
             }
         };
 
@@ -46,7 +48,7 @@ const Home = () => {
                                 <div className="active-walk-header">
                                     {activeWalk === false ? <h1>No active walk</h1> : <h1>Active walk:</h1>}
                                 </div>
-                                    {activeWalk !== false && <WalkBox name={activeWalk.placeName} photo={activeWalk.photo} time={activeWalk.timeLeft}/>}
+                                {activeWalk !== false && <WalkBox name={activeWalk.placeName} photo={activeWalk.photo} time={activeWalk.timeLeft} />}
                             </div>
                         </div>}
                 </ContentContainer>

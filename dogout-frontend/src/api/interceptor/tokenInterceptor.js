@@ -1,4 +1,5 @@
 import axios from "axios";
+import authenticationService from "../service/authenticationService";
 
 const api = axios.create({
     baseURL: '/api',
@@ -24,8 +25,13 @@ api.interceptors.response.use(
     response => {
         return response;
     },
-    error => {
+    async (error) => {
         if (error.response) {
+            if (error.response.status === 401) {
+                // REFRESH TOKEN
+                authenticationService.logout();
+                window.location.reload();
+            }
             return Promise.reject(error.response);
         }
         else if (error.request) {

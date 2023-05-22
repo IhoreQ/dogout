@@ -22,9 +22,11 @@ const MyDoggy = () => {
     useEffect(() => {
         const fetchDoggy = async () => {
             try {
-                const { data: response } = await userService.getDoggy();
-                setDoggy(response);
-                setLoading(false);
+                const response = await userService.getDoggy();
+                if (response.status === 200) {
+                    setDoggy(response.data);
+                    setLoading(false);
+                }
             } catch (error) {
                 console.error(error)
             }

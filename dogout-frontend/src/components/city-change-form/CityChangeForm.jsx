@@ -13,10 +13,12 @@ const CityChangeForm = () => {
 
     useEffect(() => {
         const fetchCities = async () => {
-            const { data: response } = await placeService.getCities();
-            setCities(response);
-            setCity(response[0].name);
-        } 
+            const response = await placeService.getCities();
+            if (response.status === 200) {
+                setCities(response.data);
+                setCity(response.data[0].name);
+            }
+        }
 
         fetchCities();
     }, [])
@@ -33,12 +35,12 @@ const CityChangeForm = () => {
         <div className="city-change-container">
             <h1>Change city</h1>
             <SeparateBar />
-                <form className="settings-form">
-                    <CustomSelect name="city" onChange={changeCity}>
-                        {cities.map(city => <option key={city.idCity} value={city.id}>{city.name}</option>)}
-                    </CustomSelect>
-                    <SignButton onClick={handleClick}>Change</SignButton>
-                </form>
+            <form className="settings-form">
+                <CustomSelect name="city" onChange={changeCity}>
+                    {cities.map(city => <option key={city.idCity} value={city.id}>{city.name}</option>)}
+                </CustomSelect>
+                <SignButton onClick={handleClick}>Change</SignButton>
+            </form>
         </div>
     )
 }

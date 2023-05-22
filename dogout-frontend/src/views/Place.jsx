@@ -26,12 +26,15 @@ const Place = () => {
     useEffect(() => {
         const fetchPlaceName = async (id) => {
             try {
-                const { data: response } = await placeService.getPlaceName(id);
-                if (response === false) {
+                const response = await placeService.getPlaceName(id);
+                if (response.data === false) {
                     navigate("/place-not-found");
                 }
-                setPlaceName(response);
-                setNameLoading(false);
+
+                if (response.status === 200) {
+                    setPlaceName(response.data);
+                    setNameLoading(false);
+                }
             } catch (error) {
                 console.error(error)
             }
@@ -39,9 +42,11 @@ const Place = () => {
 
         const fetchDogsHere = async (id) => {
             try {
-                const { data: response } = await walkService.getDogs(id);
-                setDogs(response);
-                setDogsLoading(false);
+                const response = await walkService.getDogs(id);
+                if (response.status === 200) {
+                    setDogs(response);
+                    setDogsLoading(false);
+                }
             } catch (error) {
                 console.error(error)
             }

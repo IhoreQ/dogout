@@ -4,6 +4,7 @@ import AppWrapper from "../components/common/AppWrapper";
 import Dashboard from "../components/dashboard/Dashboard";
 import ContentContainer from "../components/common/ContentContainer";
 import placeService from "../api/service/placeService";
+import authenticationService from "../api/service/authenticationService";
 import { useState, useEffect } from "react";
 import PlaceBox from "../components/common/PlaceBox";
 import Loading from "../components/common/Loading";
@@ -24,9 +25,11 @@ const Places = () => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const { data: response } = await placeService.getAllPlaces();
-        setPlaces(response);
-        setLoading(false);
+        const response = await placeService.getAllPlaces();
+        if (response.status === 200) {
+          setPlaces(response.data);
+          setLoading(false);
+        }
       } catch (error) {
         console.error(error)
       }
