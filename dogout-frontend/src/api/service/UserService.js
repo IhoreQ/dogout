@@ -44,12 +44,21 @@ const addDoggy = async (doggy, photoName) => {
     }
 }
 
+const changePassword = async (passwords) => {
+    try {
+        return await api.patch('/user/password', passwords);
+    } catch (err) {
+        return err;
+    }
+}
+
 const exportedFunctions = {
     getActiveWalk,
     getDoggy,
     finishWalk,
     deleteDoggy,
-    addDoggy
+    addDoggy,
+    changePassword
 };
 
 export default exportedFunctions;

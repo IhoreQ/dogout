@@ -17,6 +17,11 @@ const PlaceForm = ({ placeId }) => {
         placeId: placeId
     })
 
+    const triggerWarning = (id) => {
+        setWarningId(id);
+        setWarning(true);
+    }
+
     const changeTimeOfAWalk = (event) => {
         const { name, value } = event.target;
 
@@ -31,19 +36,20 @@ const PlaceForm = ({ placeId }) => {
     const handleGoClick = async (event) => {
         event.preventDefault();
 
+        if (!times.has(walkInfo.timeOfAWalk)) {
+            triggerWarning("USER_IS_AN_IDIOT");
+            return;
+        }
+
         const res = await walkService.goForAWalk(walkInfo);
 
         if (res.status !== 201) {
             const message = res.data.errorMessage;
             if (message === "DOG") {
-                setWarningId("NO_DOG");
-                setWarning(true);
-
+                triggerWarning("NO_DOG");
             }
             else if (message === "WALK") {
-                console.log("I co?");
-                setWarningId("ACTIVE_WALK");
-                setWarning(true);
+                triggerWarning("ACTIVE_WALK");
             }
         }
         else {
@@ -51,15 +57,21 @@ const PlaceForm = ({ placeId }) => {
         }
     }
 
+    const times = new Map([
+        ["00:30:00", "30 minutes"],
+        ["00:45:00", "45 minutes"],
+        ["01:00:00", "1 hour"]
+    ]);
+
     return (
         <div className="place-form">
             <form>
                 <div className="go-for-walk-box">
                     <label className="walk-time">Approximate time of a walk:</label>
-                    <select onChange={changeTimeOfAWalk} name="timeOfAWalk" className="walk-select" id="">
-                        <option value="00:30:00">30 minutes</option>
-                        <option value="00:45:00">45 minutes</option>
-                        <option value="01:00:00">1 hour</option>
+                    <select onChange={changeTimeOfAWalk} name="timeOfAWalk" className="walk-select">
+                        {Array.from(times).map(([key, value]) => (
+                            <option key={key} value={key}>{value}</option>
+                        ))}
                     </select>
                 </div>
                 <SignButton onClick={handleGoClick}>Go!</SignButton>

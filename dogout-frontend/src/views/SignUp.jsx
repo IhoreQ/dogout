@@ -6,7 +6,7 @@ const SignUp = () => {
 
     React.useEffect(() => {
         document.title = 'Sign Up | DogOut';
-      }, []);
+    }, []);
 
     return (
         <MainBox>

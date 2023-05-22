@@ -9,12 +9,16 @@ import Warning from "../components/warning/Warning";
 import { WarningContext } from "../App";
 
 import "./Place.css";
+import Loading from "../components/common/Loading";
 
 const Place = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
     const { warning } = useContext(WarningContext);
+
+    const [nameLoading, setNameLoading] = useState(true);
+    const [dogsLoading, setDogsLoading] = useState(true);
 
     const [placeName, setPlaceName] = useState("");
     const [dogs, setDogs] = useState([]);
@@ -27,6 +31,7 @@ const Place = () => {
                     navigate("/place-not-found");
                 }
                 setPlaceName(response);
+                setNameLoading(false);
             } catch (error) {
                 console.error(error)
             }
@@ -36,6 +41,7 @@ const Place = () => {
             try {
                 const { data: response } = await walkService.getDogs(id);
                 setDogs(response);
+                setDogsLoading(false);
             } catch (error) {
                 console.error(error)
             }
@@ -54,7 +60,7 @@ const Place = () => {
                     <div className="place-return-box invisible">
                     </div>
                     <div className="place-name">
-                        {placeName}
+                        {nameLoading ? <Loading /> : placeName}
                     </div>
                     <div className="place-return-box">
                         <Link to="/home">
@@ -75,15 +81,19 @@ const Place = () => {
                                 <li>Age</li>
                                 <li>Gender</li>
                             </ul>
-                            {dogs.map((dog, index) =>
-                                <ul key={index} className="dog-list">
-                                    <li>{dog.name}</li>
-                                    <li>{dog.breed}</li>
-                                    <li>{dog.size}</li>
-                                    <li>{dog.age}</li>
-                                    <li>{dog.gender}</li>
-                                </ul>
-                            )}
+                            {dogsLoading ? <Loading /> :
+                                dogs.map((dog, index) =>
+                                    <ul key={index} className="dog-list">
+                                        <li>{dog.name}</li>
+                                        <li>{dog.breed}</li>
+                                        <li>{dog.size}</li>
+                                        <li>{dog.age}</li>
+                                        <li>{dog.gender}</li>
+                                    </ul>
+                                )
+
+                            }
+
                         </div>
                     </div>
                 </div>

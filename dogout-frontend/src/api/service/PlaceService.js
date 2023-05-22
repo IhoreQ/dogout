@@ -14,12 +14,20 @@ const getPlaceName = async (id) => {
     } catch (err) {
         return err;
     }
-    
+}
+
+const getCities = async () => {
+    try {
+        return await api.get(`/city/all`);
+    } catch (err) {
+        return err;
+    }
 }
 
 const exportedFunctions = {
     getAllPlaces,
-    getPlaceName
+    getPlaceName,
+    getCities
 }
 
 export default exportedFunctions;

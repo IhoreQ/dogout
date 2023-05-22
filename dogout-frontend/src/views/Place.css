@@ -29,6 +29,12 @@
     text-align: center;
 }
 
+.place-name .lds-spinner {
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
 .place-return-box {
     display: flex;
     justify-content: center;
@@ -85,6 +91,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.dogs-here-content .lds-spinner {
+    top: 40%;
+    transform: translateY(-40%);
+    left: 0;
 }
 
 .dog-count-header {

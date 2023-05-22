@@ -15,6 +15,7 @@ const Warning = () => {
 
     const warnings = new Map([
         ["DEFAULT", "Something went wrong!"],
+        ["USER_IS_AN_IDIOT", "Are you stupid?"],
         ["DOG_DELETE", "You cannot delete your dog while you're on a walk!"],
         ["EMPTY_INPUTS", "You have to fill in all inputs!"],
         ["WRONG_AGE", "You provided age in wrong format!"],
@@ -23,7 +24,10 @@ const Warning = () => {
         ["AGE_RANGE", "Age must be between 0 and 30!"],
         ["DOG_ADD", "Error occurred during adding dog process!"],
         ["ACTIVE_WALK", "You already have an active walk!"],
-        ["NO_DOG", "You don't have a dog!"]
+        ["NO_DOG", "You don't have a dog!"],
+        ["PASSWORDS_DO_NOT_MATCH", "Passwords do not match!"],
+        ["WRONG_CURRENT_PASSWORD", "The current password is wrong!"],
+        ["PASSWORD_TOO_SHORT", 'Password should consists of at least 6 characters!']
     ]);
 
     return (

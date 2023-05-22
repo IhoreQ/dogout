@@ -25,14 +25,18 @@ public class UserController {
     }
 
     @PatchMapping("/password")
-    public ResponseEntity<String> updatePassword(@RequestHeader("Authorization") String header, @RequestBody PasswordUpdateRequest request) {
+    public ResponseEntity<Boolean> updatePassword(@RequestHeader("Authorization") String header, @RequestBody PasswordUpdateRequest request) {
 
         String email = jwtService.extractEmailFromHeader(header);
+        User user = userService.getUserByEmail(email);
 
-        User user =  userService.getUserByEmail(email);
-        user.setPassword(passwordEncoder.encode(request.password()));
+        if (!passwordEncoder.matches(request.oldPassword(), user.getPassword())) {
+            return ResponseEntity.ok(false);
+        }
+
+        user.setPassword(passwordEncoder.encode(request.newPassword()));
         userService.saveUser(user);
 
-        return ResponseEntity.ok("Password updated.");
+        return ResponseEntity.ok(true);
     }
 }
