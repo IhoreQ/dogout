@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import MainBox from "../components/common/MainBox";
-import HomeIcon from '@mui/icons-material/Home';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PlaceForm from "../components/place-form/PlaceForm";
 import placeService from "../api/service/placeService";
 import walkService from "../api/service/walkService";
@@ -62,15 +62,15 @@ const Place = () => {
             {warning && <Warning />}
             <div className="place-container">
                 <div className="place-header">
-                    <div className="place-return-box invisible">
+                    <div className="place-return-box">
+                        <Link to="/places">
+                            <ArrowBackIcon />
+                        </Link>
                     </div>
                     <div className="place-name">
                         {nameLoading ? <Loading /> : placeName}
                     </div>
-                    <div className="place-return-box">
-                        <Link to="/home">
-                            <HomeIcon />
-                        </Link>
+                    <div className="place-return-box invisible">
                     </div>
                 </div>
                 <div className="place-dogs-container">
