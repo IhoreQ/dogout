@@ -1,0 +1,93 @@
+.menu-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    background-color: #92420F;
+    border-radius: 50px 0 0 50px;
+    transition: 0.3s all;
+}
+
+.menu-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    margin-top: 5%;
+}
+
+.menu-logo-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5% 0 0;
+    height: 100%;
+}
+
+.menu-dog-logo {
+    filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5));
+    width: 90%;
+}
+
+.menu-burger {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-burger svg {
+    font-size: 3rem;
+}
+
+@media only screen and (max-width: 960px) {
+    .menu-container {
+        width: 100%;
+        height: 90px;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 0 0 50px 50px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+        transition: 0.5s all;
+        z-index: 3;
+        margin: 0;
+    }
+
+    .menu-logo {
+        position: absolute;
+        height: 90px;
+        flex-direction: row;
+        margin: 0 0 0 5%;
+        width: calc(100% - 4rem);
+    }
+
+    .menu-logo-inner {
+        margin: 0;
+    }
+
+    .menu-dog-logo {
+        width: 200px;
+    }
+
+    .menu-burger {
+        display: flex;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .separate-bar {
+        display: none;
+    }
+
+    .menu-container-active {
+        height: 458px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .menu-container {
+        border-radius: 0;
+    }
+}

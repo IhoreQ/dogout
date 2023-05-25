@@ -1,0 +1,122 @@
+.active-walk-box {
+    display: flex;
+    position: relative;
+    width: 60%;
+    height: 25%;
+    background-size: 750px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    color: var(--light-color);
+    animation-name: text-fade-in;
+    -webkit-animation-name: text-fade-in;
+    animation-duration: 0.2s;
+    -webkit-animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.active-walk-box::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-color);
+    mix-blend-mode: color;
+    border-radius: 0 0 50px 50px;
+}
+
+.active-walk-box-header {
+    width: 100%;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.active-walk-box-header h1 {
+    font-weight: 400;
+    font-size: 2rem;
+    text-shadow: var(--main-text-shadow);
+    width: 50%;
+    text-align: center;
+}
+
+.active-walk-box-header p {
+    text-shadow: var(--main-text-shadow);
+}
+
+.active-walk-symmetric-p,
+.active-walk-p {
+    width: 25%;
+    text-align: end;
+}
+
+.active-walk-p {
+    padding-right: 1rem;
+}
+
+.active-walk-box-color {
+    width: 100%;
+    height: 100%;
+    background-color: #F5C9A1;
+    border-radius: 0 0 50px 50px;
+    mix-blend-mode: color;
+}
+
+.active-walk-finish {
+    position: absolute;
+    width: 75%;
+    height: 25%;
+    background: #134E5E;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: 0.3s background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: var(--main-text-shadow);
+}
+
+.active-walk-finish h1 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.active-walk-finish:hover {
+    background-color: #155769;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 960px) {
+    .active-walk-box {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .active-walk-box {
+        width: 100%;
+    }
+
+    .active-walk-box-header {
+        padding-right: 0.2rem;
+        justify-content: space-between;
+    }
+
+    .active-walk-box-header p {
+        padding: 0;
+    }
+}

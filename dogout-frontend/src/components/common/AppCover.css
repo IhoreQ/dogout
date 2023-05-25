@@ -1,0 +1,20 @@
+.app-cover {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1550px;
+    height: 850px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    border-radius: 50px;
+    color: var(--light-color);
+}
+
+@media only screen and (max-width: 520px) {
+    .app-cover {
+        border-radius: 0;
+        height: 100vh;
+    }
+}

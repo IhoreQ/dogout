@@ -1,0 +1,64 @@
+.settings-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.settings-content {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation-name: text-fade-in;
+    -webkit-animation-name: text-fade-in; 
+    animation-duration: 0.3s;   
+    -webkit-animation-duration: 0.3s;
+    animation-timing-function: ease-in-out; 
+    -webkit-animation-timing-function: ease-in-out; 
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.settings-form input {
+    width: 300px;
+    background-color: var(--light-color);
+    border: none;
+    outline: none;
+    color: #92420F;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding-left: 1rem;
+    height: 60px;
+    margin-bottom: 1rem;
+    font-family: 'Dosis';
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 520px) {
+    .settings-form input {
+        width: 100%;
+    }
+
+    .settings-form select {
+        width: 100%;
+    }
+
+    .settings-form .sign-button {
+        width: 100%;
+    }
+}
+

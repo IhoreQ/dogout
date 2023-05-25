@@ -1,0 +1,137 @@
+.new-dog-add-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.new-dog-add-page h1 {
+    font-weight: 500;
+    font-size: 2.5rem;
+    text-shadow: var(--main-text-shadow);
+    margin-bottom: 2rem;
+}
+
+.new-dog-paw {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #92420F;
+    font-size: 50rem;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.new-dog-paw svg {
+    font-size: 55rem;
+}
+
+.new-dog-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 75%;
+}
+
+.new-dog-form input {
+    width: 300px;
+    background-color: var(--light-color);
+    border: none;
+    outline: none;
+    color: #92420F;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    padding-left: 1rem;
+    height: 60px;
+    margin-bottom: 1rem;
+    font-family: 'Dosis';
+    font-weight: 500;
+}
+
+.new-dog-form input:-internal-autofill-selected {
+    background-color: #F5C9A1;
+}
+
+
+.new-dog-form label {
+    width: 300px;
+    background-color: #F5C9A1;
+    color: #92420F;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    transition: 0.3s all;
+}
+
+.new-dog-form span {
+    margin-left: 0.3rem;
+}
+
+.dog-photo-upload svg {
+    font-size: 2rem;
+}
+
+.dog-photo-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 10px 12px;
+    cursor: pointer;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dog-photo-upload:hover {
+    background-color: #F5D1B0;
+}
+
+.new-dog-form .sign-button {
+    width: 300px;
+}
+
+.new-dog-textarea {
+    resize: none;
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: #F5C9A1;
+    border: none;
+    outline: none;
+    padding-left: 0.2rem;
+    color: #92420F;
+    font-family: var(--main-font-family);
+}
+
+@media only screen and (max-width: 960px) {
+    .new-dog-paw svg {
+        font-size: 45rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .new-dog-form input,
+    .new-dog-form select,
+    .new-dog-form textarea,
+    .new-dog-form label,
+    .new-dog-form .sign-button {
+        width: 90%;
+    }
+}

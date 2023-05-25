@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --input-color: rgba(114, 42, 4, 0.7); 
+    --light-color: #F5C9A1;
+    --blue-color: #134E5E;
+    --blue-hover-color: #155769;
+    --background-color: #C3B3A6;
+    --main-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    --main-font-family: 'Dosis', serif;
+}
+
+body {
+    color:  var(--light-color);
+    font-size: 16px;
+    font-family: var(--main-font-family);
+    background: var(--background-color);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/* Animations */
+
+@keyframes fade-in {
+    0% {
+        transform: scale(0);
+        opacity: 0.0;       
+    }
+    60% {
+        transform: scale(1.05);  
+    }
+    80% {
+        transform: scale(0.9);
+        opacity: 1; 
+    }   
+    100% {
+        transform: scale(1);
+        opacity: 1; 
+    }       
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        -webkit-transform: scale(0);
+        opacity: 0.0;       
+    }
+    60% {
+        -webkit-transform: scale(1.05);
+    }
+    80% {
+        -webkit-transform: scale(0.9);
+        opacity: 1; 
+    }   
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 1; 
+    }       
+}
+
+@keyframes text-fade-in {
+    0% {
+        opacity: 0.0;       
+    }
+    100% {
+        opacity: 1; 
+    }       
+}
+
+@-webkit-keyframes text-fade-in {
+    0% {
+        opacity: 0.0;       
+    }
+    100% {
+        opacity: 1; 
+    }       
+}

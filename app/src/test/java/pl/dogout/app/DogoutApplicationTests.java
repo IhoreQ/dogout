@@ -8,6 +8,7 @@ class DogoutApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
