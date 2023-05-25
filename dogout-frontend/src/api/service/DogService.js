@@ -2,8 +2,7 @@ import api from '../interceptor/tokenInterceptor';
 
 const getBreeds = async () => {
     try {
-        const res = await api.get('/dog/breeds');
-        return res;
+        return await api.get('/dog/breeds');
     } catch (err) {
         return err;
     }
