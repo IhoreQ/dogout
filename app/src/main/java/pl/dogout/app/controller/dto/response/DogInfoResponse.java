@@ -11,7 +11,8 @@ public record DogInfoResponse(String name,
                               String description,
                               String photo) {
     @JsonCreator
-    public DogInfoResponse {}
+    public DogInfoResponse {
+    }
 
     public static DogInfoResponse getResponse(Dog dog) {
         String gender = dog.getGender() ? "Male" : "Female";

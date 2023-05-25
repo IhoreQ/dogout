@@ -11,8 +11,6 @@ import Settings from "./views/Settings";
 import GuestRoutes from "./components/route-settings/GuestRoutes";
 import UserRoutes from "./components/route-settings/UserRoutes";
 
-import Test from "./views/Test";
-
 import "./App.css"
 import Place from "./views/Place";
 
@@ -41,11 +39,9 @@ function App() {
                 <Route path="/" element={<Navigator />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/test" element={<Test />} />
               </Route>
 
               {/* User paths */}
-
               <Route element={<UserRoutes />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/places" element={<Places />} />

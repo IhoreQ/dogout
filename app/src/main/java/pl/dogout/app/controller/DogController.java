@@ -1,6 +1,5 @@
 package pl.dogout.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,6 @@ public class DogController {
     private final WalkService walkService;
     private final JwtService jwtService;
 
-    @Autowired
     public DogController(DogService dogService, UserService userService, WalkService walkService, JwtService jwtService) {
         this.dogService = dogService;
         this.userService = userService;

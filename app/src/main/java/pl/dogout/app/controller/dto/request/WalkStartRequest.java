@@ -1,7 +1,10 @@
 package pl.dogout.app.controller.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public record WalkStartRequest(String timeOfAWalk,
                                Long placeId) {
-
-    public WalkStartRequest {}
+    @JsonCreator
+    public WalkStartRequest {
+    }
 }

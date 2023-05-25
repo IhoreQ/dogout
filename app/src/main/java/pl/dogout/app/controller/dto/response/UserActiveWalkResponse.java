@@ -11,7 +11,8 @@ public record UserActiveWalkResponse(Long walkId,
                                      String photo) {
 
     @JsonCreator
-    public UserActiveWalkResponse {}
+    public UserActiveWalkResponse {
+    }
 
     public static UserActiveWalkResponse getResponse(ActiveWalk activeWalk, LocalTime timeLeft) {
         return new UserActiveWalkResponse(activeWalk.getIdActiveWalk(), timeLeft, activeWalk.getPlace().getName(), activeWalk.getPlace().getPhoto());

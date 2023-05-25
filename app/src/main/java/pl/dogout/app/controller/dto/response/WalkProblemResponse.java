@@ -1,3 +1,4 @@
 package pl.dogout.app.controller.dto.response;
 
-public record WalkProblemResponse(String errorMessage) {}
+public record WalkProblemResponse(String errorMessage) {
+}

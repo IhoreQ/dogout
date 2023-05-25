@@ -17,7 +17,6 @@ public class UserController {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserController(UserService userService, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;

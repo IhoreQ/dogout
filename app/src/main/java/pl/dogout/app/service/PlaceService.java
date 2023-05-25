@@ -14,7 +14,6 @@ public class PlaceService {
     private final PlaceRepository placeRepository;
     private final CityRepository cityRepository;
 
-    @Autowired
     public PlaceService(PlaceRepository placeRepository, CityRepository cityRepository) {
         this.placeRepository = placeRepository;
         this.cityRepository = cityRepository;

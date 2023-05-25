@@ -79,7 +79,7 @@ const NewDogForm = () => {
             triggerWarning("WRONG_AGE")
             return;
         }
-        dogInfo.gender = dogInfo.gender === "true";
+        dogInfo.gender = dogInfo.gender === 'true' || dogInfo.gender === true;
         dogInfo.age = age;
         dogInfo.breedId = parseInt(dogInfo.breedId, 10);
     }
@@ -119,7 +119,6 @@ const NewDogForm = () => {
             triggerWarning("AGE_RANGE");
         }
         else {
-            // TODO NAPRAW TO KURWA
             const res = await imageService.uploadImage(uploadedImage);
 
             if (res.status !== 200) {

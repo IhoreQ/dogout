@@ -1,6 +1,5 @@
 package pl.dogout.app.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.dogout.app.model.ActiveWalk;
 import pl.dogout.app.model.Dog;
@@ -24,7 +23,7 @@ public class WalkService {
     private final DogRepository dogRepository;
     private final PlaceRepository placeRepository;
 
-    @Autowired
+
     public WalkService(WalkRepository walkRepository, UserRepository userRepository, DogRepository dogRepository, PlaceRepository placeRepository) {
         this.walkRepository = walkRepository;
         this.userRepository = userRepository;
@@ -92,7 +91,6 @@ public class WalkService {
                 finishWalk(activeWalk);
             else
                 activeWalksAfterTheGreatPurge.add(activeWalk);
-
         }
 
         return activeWalksAfterTheGreatPurge.stream().map(walk -> walk.getUser()

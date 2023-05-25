@@ -1,7 +1,5 @@
 package pl.dogout.app.controller;
 
-import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,6 @@ public class ImageController {
 
     private final ImageService imageService;
 
-    @Autowired
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }

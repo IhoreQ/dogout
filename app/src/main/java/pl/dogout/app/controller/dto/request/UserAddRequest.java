@@ -7,5 +7,6 @@ public record UserAddRequest(String firstName,
                              String email,
                              String password) {
     @JsonCreator
-    public UserAddRequest {}
+    public UserAddRequest {
+    }
 }

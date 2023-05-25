@@ -20,7 +20,6 @@ public class DogService {
     private final DogRepository dogRepository;
     private final DogBreedRepository dogBreedRepository;
 
-    @Autowired
     public DogService(UserService userService, ImageService imageService, DogRepository dogRepository, DogBreedRepository dogBreedRepository) {
         this.userService = userService;
         this.imageService = imageService;
